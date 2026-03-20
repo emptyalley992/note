@@ -1,0 +1,70 @@
+# 站点基本信息
+site_name: 我的学习笔记
+site_description: 个人技术文档与学习笔记
+site_author: emptyalley992
+site_url: https://emptyalley992.github.io/notes/
+repo_url: https://github.com/emptyalley992/notes
+repo_name: emptyalley992/notes
+
+# UI 主题配置
+theme:
+  name: material
+  language: zh # 设置为中文
+  features:
+    - navigation.tabs # 开启顶部导航
+    - navigation.sections # 侧边栏按模块折叠
+    - navigation.expand # 默认展开侧边栏（如果想默认收起请删除此行）
+    - navigation.top # 开启返回顶部按钮
+    - search.suggest # 搜索建议
+    - search.highlight # 搜索词高亮
+    - toc.follow # 右侧目录随滚动高亮
+  palette: 
+    # 默认浅色模式，支持手动切换暗黑模式
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: 切换到暗色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到浅色模式
+
+# 核心自动化插件
+plugins:
+  - search:
+      lang: zh # 开启中文全文搜索支持
+  - awesome-pages:
+      collapse_single_pages: true # 自动根据 docs 目录生成侧边栏
+
+# 高级 Markdown 渲染配置（完美契合你的需求）
+markdown_extensions:
+  - toc:
+      permalink: true # 生成标题锚点
+      toc_depth: 3 # 支持 [TOC] 语法以及右侧悬浮目录树
+  - pymdownx.highlight:
+      anchor_linenums: true # 代码块支持行号
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences: # 支持代码块与 Mermaid 流程图
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.arithmatex: # 支持 LaTeX 数学公式
+      generic: true
+  - pymdownx.tasklist: # 支持任务列表 [ ]
+      custom_checkbox: true
+  - tables # 支持表格
+  - md_in_html # 支持 HTML 中混写 Markdown
+
+# LaTeX 公式所需的前端 JS 依赖
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
