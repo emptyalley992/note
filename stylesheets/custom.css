@@ -20,13 +20,13 @@
 
     /* ======== 右侧边栏（TOC 目录区） ======== */
     .md-sidebar--secondary {
-        width:14rem !important;    /* 我们给长标题足足 24rem 的空间 */
-        flex: 0 0 14rem !important; /* 强制分配网格地盘，不允许被中间挤压 */
+        width:16rem !important;    /* 我们给长标题足足 24rem 的空间 */
+        flex: 0 0 16rem !important; /* 强制分配网格地盘，不允许被中间挤压 */
     }
     
     /* 【最核心修复：狙击 JS！】MkDocs 的 JS 会疯狂给这里写入内联宽度，我们必须覆盖它！ */
     .md-sidebar--secondary .md-sidebar__scrollwrap {
-        width: 14rem !important; 
+        width: 16rem !important; 
     }
 
     /* 彻底解除目录文字层层嵌套的紧箍咒，让它们放心大胆地往右边伸展 */
