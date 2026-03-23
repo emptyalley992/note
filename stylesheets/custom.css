@@ -1,51 +1,58 @@
 /* docs/stylesheets/custom.css */
 
-/* 1. 突破整体最大宽度限制，占据屏幕 98% 宽度 */
+/* 1. 让整个网页容器变宽 (占屏幕的 98%) */
 .md-grid {
-    max-width: 98% !important; 
+    max-width: 98% !important;
 }
 
-/* 2. 针对电脑大屏幕精细排版 */
+/* 2. 针对大屏幕，彻底重写底层 Flex 布局 */
 @media screen and (min-width: 1220px) {
     
+    /* 让主容器变成弹性盒子，严格按比例瓜分屏幕 */
+    .md-main__inner {
+        display: flex !important;
+        justify-content: space-between !important;
+    }
+
     /* ======== 左侧边栏（导航区） ======== */
     .md-sidebar--primary {
-        width: 16rem !important;
-        flex: 0 0 16rem !important; /* 强制向网页申请 16rem 的专属地盘，谁也抢不走 */
-    }
-    /* 狙击 JS 动态写入：强制让左侧内部盒子撑满地盘 */
-    .md-sidebar--primary .md-sidebar__scrollwrap {
-        width: 16rem !important; 
+        flex: 0 0 15% !important; /* 强行划定屏幕总宽的 15% 给左侧 */
+        width: 15% !important;
+        max-width: 15% !important;
     }
 
     /* ======== 右侧边栏（TOC 目录区） ======== */
     .md-sidebar--secondary {
-        width:16rem !important;    /* 我们给长标题足足 24rem 的空间 */
-        flex: 0 0 16rem !important; /* 强制分配网格地盘，不允许被中间挤压 */
-    }
-    
-    /* 【最核心修复：狙击 JS！】MkDocs 的 JS 会疯狂给这里写入内联宽度，我们必须覆盖它！ */
-    .md-sidebar--secondary .md-sidebar__scrollwrap {
-        width: 16rem !important; 
+        flex: 0 0 24% !important; /* 强行划定屏幕总宽的 24% 给右侧！超级宽，专门治长标题 */
+        width: 24% !important;
+        max-width: 24% !important;
     }
 
-    /* 彻底解除目录文字层层嵌套的紧箍咒，让它们放心大胆地往右边伸展 */
-    .md-nav--secondary,
-    .md-nav--secondary .md-nav__list,
-    .md-nav--secondary .md-nav__item,
-    .md-nav--secondary .md-nav__link {
+    /* 【核心绝杀点：彻底打败 JS 动态写入的宽度】 */
+    /* 不管 JS 计算出多少像素，强制让内部容器 100% 填满我们上面分配的 24% 领地 */
+    .md-sidebar__scrollwrap,
+    .md-sidebar__inner {
         width: 100% !important;
         max-width: 100% !important;
     }
 
+    /* 解除内部文字标签自带的“紧箍咒” */
+    .md-nav--secondary .md-nav__link {
+        width: 100% !important;
+        max-width: none !important; 
+    }
+
     /* ======== 中间正文区域 (贯穿线与边距) ======== */
     .md-content {
-        padding-left: 2.5rem !important;
-        padding-right: 2.5rem !important;
-        /* 画出两条完美的贯穿线 */
+        flex: 1 1 auto !important; /* 自动填满左右两侧剩下的所有中间空间 */
+        min-width: 0 !important;   /* 防止内部代码块过长撑爆网页 */
+        
+        padding-left: 2.5rem !important;  /* 呼吸感留白 */
+        padding-right: 2.5rem !important; 
+        
+        /* 两条完美的贯穿细线 */
         border-left: 1px solid var(--md-default-fg-color--lightest) !important;
         border-right: 1px solid var(--md-default-fg-color--lightest) !important;
-        /* 保证就算你只写了一个字，线也会一直画到屏幕最底端！ */
         min-height: 100vh !important;
     }
 }
