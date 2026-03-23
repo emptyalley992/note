@@ -44,7 +44,7 @@ flowchart LR
 
 ----------
 
-## 一、神经算子领域发展综述（2019 - 2026）
+## 一、神经算子领域发展综述（2019 - 2026）我要看看你你能弄多长到底多长啊
 
 ### 1. 奠基阶段：架构的多样化探索 (2019 - 2021)
 
@@ -351,5 +351,5 @@ $\mathcal{L} = \lambda_{\text{fit}}\mathcal{L}_{\text{fit}} + \lambda_{\text{but
 **实验结果结论：**
 本方法的预测MAPE（约0.5%）和买卖价差拟合度均大幅优于工业界标准SVI（1%~2%）。更重要的是，生成一个曲面的推理时间极短，且完美满足无套利要求；相较于传统的神经网络方法（DS），在参数量和时间成本上实现了指数级的压缩（一个模型 vs 几万个模型）。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwOTYxNzkxOF19
+eyJoaXN0b3J5IjpbLTI5MDE0MTAzNiwtMTA5NjE3OTE4XX0=
 -->
