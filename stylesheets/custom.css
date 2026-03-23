@@ -1,62 +1,51 @@
 /* docs/stylesheets/custom.css */
 
-/* 1. 突破全局限制，占据 98% 屏幕 */
+/* 1. 突破整体最大宽度限制，占据屏幕 98% 宽度 */
 .md-grid {
-    max-width: 98% !important;
+    max-width: 98% !important; 
 }
 
-/* 2. 针对大屏幕的终极布局重写 */
+/* 2. 针对电脑大屏幕精细排版 */
 @media screen and (min-width: 1220px) {
     
-    /* 建立我们的绝对规则：直接定义左右两侧的物理宽度！ */
-    :root {
-        --my-left-nav-width: 260px;  /* 左侧边栏宽度 */
-        --my-right-toc-width: 380px; /* 右侧目录超级宽度（专门治你的长测试文本！） */
-    }
-
-    /* 将中间变成完美的弹性盒子 */
-    .md-main__inner {
-        display: flex !important;
-        justify-content: space-between !important;
-    }
-
-    /* ======== 左侧边栏 ======== */
+    /* ======== 左侧边栏（导航区） ======== */
     .md-sidebar--primary {
-        flex: 0 0 var(--my-left-nav-width) !important;
-        width: var(--my-left-nav-width) !important;
+        width: 16rem !important;
+        flex: 0 0 16rem !important; /* 强制向网页申请 16rem 的专属地盘，谁也抢不走 */
     }
-    /* 绝杀 JS：强制悬浮层也必须这么宽 */
+    /* 狙击 JS 动态写入：强制让左侧内部盒子撑满地盘 */
     .md-sidebar--primary .md-sidebar__scrollwrap {
-        width: var(--my-left-nav-width) !important;
+        width: 16rem !important; 
     }
 
-    /* ======== 右侧边栏（TOC 目录） ======== */
+    /* ======== 右侧边栏（TOC 目录区） ======== */
     .md-sidebar--secondary {
-        flex: 0 0 var(--my-right-toc-width) !important;
-        width: var(--my-right-toc-width) !important;
+        width:16rem !important;    /* 我们给长标题足足 24rem 的空间 */
+        flex: 0 0 16rem !important; /* 强制分配网格地盘，不允许被中间挤压 */
     }
-    /* 绝杀 JS：击碎那 220px 的隐形牢笼，让文字容器直接拓宽到 380px！ */
+    
+    /* 【最核心修复：狙击 JS！】MkDocs 的 JS 会疯狂给这里写入内联宽度，我们必须覆盖它！ */
     .md-sidebar--secondary .md-sidebar__scrollwrap {
-        width: var(--my-right-toc-width) !important;
+        width: 16rem !important; 
     }
-    /* 保证内层完全撑满 */
-    .md-sidebar--secondary .md-sidebar__inner,
-    .md-sidebar--secondary .md-nav {
+
+    /* 彻底解除目录文字层层嵌套的紧箍咒，让它们放心大胆地往右边伸展 */
+    .md-nav--secondary,
+    .md-nav--secondary .md-nav__list,
+    .md-nav--secondary .md-nav__item,
+    .md-nav--secondary .md-nav__link {
         width: 100% !important;
         max-width: 100% !important;
     }
 
-    /* ======== 中间正文区域 ======== */
+    /* ======== 中间正文区域 (贯穿线与边距) ======== */
     .md-content {
-        flex: 1 1 auto !important; /* 占据剩下的所有空间 */
-        min-width: 0 !important;   /* 防止内部长代码撑爆网页 */
-        
-        padding-left: 3rem !important;  /* 增加呼吸感 */
-        padding-right: 3rem !important; 
-        
-        /* 贯穿屏幕两端的细线 */
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
+        /* 画出两条完美的贯穿线 */
         border-left: 1px solid var(--md-default-fg-color--lightest) !important;
         border-right: 1px solid var(--md-default-fg-color--lightest) !important;
+        /* 保证就算你只写了一个字，线也会一直画到屏幕最底端！ */
         min-height: 100vh !important;
     }
 }
