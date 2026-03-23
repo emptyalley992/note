@@ -1,56 +1,60 @@
 /* docs/stylesheets/custom.css */
 
-/* 1. 让整个网页容器变宽 (占屏幕的 98%) */
+/* 1. 突破全局限制，占据 98% 屏幕 */
 .md-grid {
     max-width: 98% !important;
 }
 
-/* 2. 针对大屏幕，彻底重写底层 Flex 布局 */
+/* 2. 针对大屏幕的终极布局重写 */
 @media screen and (min-width: 1220px) {
     
-    /* 让主容器变成弹性盒子，严格按比例瓜分屏幕 */
+    /* 建立我们的绝对规则：直接定义左右两侧的物理宽度！ */
+    :root {
+        --my-left-nav-width: 260px;  /* 左侧边栏宽度 */
+        --my-right-toc-width: 380px; /* 右侧目录超级宽度（专门治你的长测试文本！） */
+    }
+
+    /* 将中间变成完美的弹性盒子 */
     .md-main__inner {
         display: flex !important;
         justify-content: space-between !important;
     }
 
-    /* ======== 左侧边栏（导航区） ======== */
+    /* ======== 左侧边栏 ======== */
     .md-sidebar--primary {
-        flex: 0 0 15% !important; /* 强行划定屏幕总宽的 15% 给左侧 */
-        width: 15% !important;
-        max-width: 15% !important;
+        flex: 0 0 var(--my-left-nav-width) !important;
+        width: var(--my-left-nav-width) !important;
+    }
+    /* 绝杀 JS：强制悬浮层也必须这么宽 */
+    .md-sidebar--primary .md-sidebar__scrollwrap {
+        width: var(--my-left-nav-width) !important;
     }
 
-    /* ======== 右侧边栏（TOC 目录区） ======== */
+    /* ======== 右侧边栏（TOC 目录） ======== */
     .md-sidebar--secondary {
-        flex: 0 0 24% !important; /* 强行划定屏幕总宽的 24% 给右侧！超级宽，专门治长标题 */
-        width: 24% !important;
-        max-width: 24% !important;
+        flex: 0 0 var(--my-right-toc-width) !important;
+        width: var(--my-right-toc-width) !important;
     }
-
-    /* 【核心绝杀点：彻底打败 JS 动态写入的宽度】 */
-    /* 不管 JS 计算出多少像素，强制让内部容器 100% 填满我们上面分配的 24% 领地 */
-    .md-sidebar__scrollwrap,
-    .md-sidebar__inner {
+    /* 绝杀 JS：击碎那 220px 的隐形牢笼，让文字容器直接拓宽到 380px！ */
+    .md-sidebar--secondary .md-sidebar__scrollwrap {
+        width: var(--my-right-toc-width) !important;
+    }
+    /* 保证内层完全撑满 */
+    .md-sidebar--secondary .md-sidebar__inner,
+    .md-sidebar--secondary .md-nav {
         width: 100% !important;
         max-width: 100% !important;
     }
 
-    /* 解除内部文字标签自带的“紧箍咒” */
-    .md-nav--secondary .md-nav__link {
-        width: 100% !important;
-        max-width: none !important; 
-    }
-
-    /* ======== 中间正文区域 (贯穿线与边距) ======== */
+    /* ======== 中间正文区域 ======== */
     .md-content {
-        flex: 1 1 auto !important; /* 自动填满左右两侧剩下的所有中间空间 */
-        min-width: 0 !important;   /* 防止内部代码块过长撑爆网页 */
+        flex: 1 1 auto !important; /* 占据剩下的所有空间 */
+        min-width: 0 !important;   /* 防止内部长代码撑爆网页 */
         
-        padding-left: 2.5rem !important;  /* 呼吸感留白 */
-        padding-right: 2.5rem !important; 
+        padding-left: 3rem !important;  /* 增加呼吸感 */
+        padding-right: 3rem !important; 
         
-        /* 两条完美的贯穿细线 */
+        /* 贯穿屏幕两端的细线 */
         border-left: 1px solid var(--md-default-fg-color--lightest) !important;
         border-right: 1px solid var(--md-default-fg-color--lightest) !important;
         min-height: 100vh !important;
