@@ -1,0 +1,6 @@
+/* docs/stylesheets/custom.css */
+:root > * {
+    /* 突破默认的 1220px 限制，让网页主体占据屏幕宽度的 96% */
+    /* 这样左侧边栏和右侧目录就会自动贴近屏幕左右边缘 */
+    --md-max-width: 96vw;
+}
