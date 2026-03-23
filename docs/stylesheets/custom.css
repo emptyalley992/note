@@ -21,7 +21,7 @@
     /* ======== 右侧边栏（TOC 目录区） ======== */
     .md-sidebar--secondary {
         width: 24rem !important;    /* 我们给长标题足足 24rem 的空间 */
-        flex: 0 0 24rem !important; /* 强制分配网格地盘，不允许被中间挤压 */
+        flex: 0 0 25rem !important; /* 强制分配网格地盘，不允许被中间挤压 */
     }
     
     /* 【最核心修复：狙击 JS！】MkDocs 的 JS 会疯狂给这里写入内联宽度，我们必须覆盖它！ */
