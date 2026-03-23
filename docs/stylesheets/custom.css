@@ -1,22 +1,32 @@
 
-/* 1. 强制突破整体页面的最大宽度限制，让内容区域占据屏幕 98% 的宽度 */
-/* 这样左侧边栏和右侧边栏就会被直接推到屏幕的最左和最右边缘 */
+/* 1. 强制突破整体页面的最大宽度限制，让内容占据屏幕 98% 的宽度 */
 .md-grid {
     max-width: 98% !important; 
 }
 
-/* 2. 针对电脑端大屏幕，单独调整侧边栏宽度 */
+/* 2. 针对电脑大屏幕的精细化布局调整 */
 @media screen and (min-width: 1220px) {
     
-    /* 让左侧边栏（导航）更贴近左侧边缘，并适当微调宽度 */
+    /* ======== 左侧边栏（导航） ======== */
     .md-sidebar--primary {
-        width: 16rem !important; /* 默认较窄，可根据需要调整 */
-        left: 1% !important;     /* 强制靠左 */
+        width: 16rem !important;
+        left: 2% !important;
+        /* 在右侧加一条极细的分割线 */
+        border-right: 1px solid var(--md-default-fg-color--lightest) !important;
     }
 
-    /* 解决右侧目录（TOC）文字被迫换行的问题 */
+    /* ======== 右侧边栏（目录 TOC） ======== */
     .md-sidebar--secondary {
-        width: 22rem !important; /* 核心修改：把右侧目录区域大幅加宽（默认只有 12rem 左右） */
-        right: 1% !important;    /* 强制靠右 */
+        width: 22rem !important;
+        right: 2% !important;
+        /* 在左侧加一条极细的分割线 */
+        border-left: 1px solid var(--md-default-fg-color--lightest) !important;
+    }
+
+    /* ======== 中间主体内容区 ======== */
+    .md-content {
+        /* 【优化】为了防止笔记正文紧贴着两边的分割线，左右各增加 2rem 的呼吸感留白 */
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
     }
 }
