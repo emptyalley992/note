@@ -10,7 +10,7 @@
     /* ======== 左侧边栏（导航） ======== */
     .md-sidebar--primary {
         width: 16rem !important;
-        left: 2% !important;
+        left: 1% !important;
         /* 在右侧加一条极细的分割线 */
         border-right: 1px solid var(--md-default-fg-color--lightest) !important;
     }
@@ -18,7 +18,7 @@
     /* ======== 右侧边栏（目录 TOC） ======== */
     .md-sidebar--secondary {
         width: 22rem !important;
-        right: 2% !important;
+        right: 1% !important;
         /* 在左侧加一条极细的分割线 */
         border-left: 1px solid var(--md-default-fg-color--lightest) !important;
     }
