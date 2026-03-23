@@ -1,5 +1,6 @@
+/* docs/stylesheets/custom.css */
 
-/* 1. 强制突破整体页面的最大宽度限制，让内容占据屏幕 98% 的宽度 */
+/* 1. 强制突破整体页面的最大宽度限制，占据屏幕 98% 的宽度 */
 .md-grid {
     max-width: 98% !important; 
 }
@@ -8,25 +9,40 @@
 @media screen and (min-width: 1220px) {
     
     /* ======== 左侧边栏（导航） ======== */
-    .md-sidebar--primary {
+    /* 清除可能遗留的边框设置，并强制各层级容器宽度 */
+    .md-sidebar--primary,
+    .md-sidebar--primary .md-sidebar__scrollwrap,
+    .md-sidebar--primary .md-sidebar__inner {
         width: 16rem !important;
         left: 1% !important;
-        /* 在右侧加一条极细的分割线 */
-        border-right: 2px solid var(--md-default-fg-color--lightest) !important;
+        border: none !important; 
     }
 
     /* ======== 右侧边栏（目录 TOC） ======== */
-    .md-sidebar--secondary {
-        width: 22rem !important;
+    /* 强行撑开右侧所有层级的容器（宽度加到了 26rem，对长标题非常友好） */
+    .md-sidebar--secondary,
+    .md-sidebar--secondary .md-sidebar__scrollwrap,
+    .md-sidebar--secondary .md-sidebar__inner {
+        width: 22rem !important; 
         right: 1% !important;
-        /* 在左侧加一条极细的分割线 */
-        border-left: 2px solid var(--md-default-fg-color--lightest) !important;
+        border: none !important;
     }
 
-    /* ======== 中间主体内容区 ======== */
+    /* 【核心修复】解除右侧目录文字本身的宽度封印，让它充分利用 26rem 的空间 */
+    .md-nav--secondary .md-nav__link {
+        max-width: 100% !important;
+    }
+
+    /* ======== 中间主体内容区（完美的分割线方案） ======== */
+    /* 我们把线画在中间正文区域的左右两侧，这样线就会永远贴着内容！ */
     .md-content {
-        /* 【优化】为了防止笔记正文紧贴着两边的分割线，左右各增加 2rem 的呼吸感留白 */
-        padding-left: 2rem !important;
-        padding-right: 2rem !important;
+        padding-left: 2.5rem !important;  /* 正文与左线的呼吸感间距 */
+        padding-right: 2.5rem !important; /* 正文与右线的呼吸感间距 */
+        border-left: 2px solid var(--md-default-fg-color--lightest) !important;
+        border-right: 2px solid var(--md-default-fg-color--lightest) !important;
+        
+        /* 【核心修复】强制中间内容区域至少有 100% 的屏幕高度 */
+        /* 这样即使你的某篇笔记只有一行字，左右两边的细线也会一直贯穿到屏幕最底端！ */
+        min-height: 100vh !important; 
     }
 }
