@@ -1,10 +1,10 @@
 # 站点基本信息
-site_name: 我的学习笔记
+site_name: 学习笔记
 site_description: 个人技术文档与学习笔记
 site_author: emptyalley992
-site_url: https://emptyalley992.github.io/notes/
-repo_url: https://github.com/emptyalley992/notes
-repo_name: emptyalley992/notes
+site_url: https://emptyalley992.github.io/note/
+repo_url: https://github.com/emptyalley992/note
+repo_name: emptyalley992/note
 
 # UI 主题配置
 theme:
