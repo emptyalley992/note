@@ -23,7 +23,7 @@
     .md-sidebar--secondary,
     .md-sidebar--secondary .md-sidebar__scrollwrap,
     .md-sidebar--secondary .md-sidebar__inner {
-        width: 18rem !important; 
+        width: 10rem !important; 
         right: 1% !important;
         border: none !important;
     }
