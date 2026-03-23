@@ -1,48 +1,51 @@
 /* docs/stylesheets/custom.css */
 
-/* 1. 强制突破整体页面的最大宽度限制，占据屏幕 98% 的宽度 */
+/* 1. 突破整体最大宽度限制，占据屏幕 98% 宽度 */
 .md-grid {
     max-width: 98% !important; 
 }
 
-/* 2. 针对电脑大屏幕的精细化布局调整 */
+/* 2. 针对电脑大屏幕精细排版 */
 @media screen and (min-width: 1220px) {
     
-    /* ======== 左侧边栏（导航） ======== */
-    /* 清除可能遗留的边框设置，并强制各层级容器宽度 */
-    .md-sidebar--primary,
-    .md-sidebar--primary .md-sidebar__scrollwrap,
-    .md-sidebar--primary .md-sidebar__inner {
+    /* ======== 左侧边栏（导航区） ======== */
+    .md-sidebar--primary {
         width: 16rem !important;
-        left: 1% !important;
-        border: none !important; 
+        flex: 0 0 16rem !important; /* 强制向网页申请 16rem 的专属地盘，谁也抢不走 */
+    }
+    /* 狙击 JS 动态写入：强制让左侧内部盒子撑满地盘 */
+    .md-sidebar--primary .md-sidebar__scrollwrap {
+        width: 16rem !important; 
     }
 
-    /* ======== 右侧边栏（目录 TOC） ======== */
-    /* 强行撑开右侧所有层级的容器（宽度加到了 26rem，对长标题非常友好） */
-    .md-sidebar--secondary,
-    .md-sidebar--secondary .md-sidebar__scrollwrap,
-    .md-sidebar--secondary .md-sidebar__inner {
-        width: 26rem !important; 
-        right: 1% !important;
-        border: none !important;
+    /* ======== 右侧边栏（TOC 目录区） ======== */
+    .md-sidebar--secondary {
+        width: 26rem !important;    /* 我们给长标题足足 24rem 的空间 */
+        flex: 0 0 26rem !important; /* 强制分配网格地盘，不允许被中间挤压 */
+    }
+    
+    /* 【最核心修复：狙击 JS！】MkDocs 的 JS 会疯狂给这里写入内联宽度，我们必须覆盖它！ */
+    .md-sidebar--secondary .md-sidebar__scrollwrap {
+        width: 24rem !important; 
     }
 
-    /* 【核心修复】解除右侧目录文字本身的宽度封印，让它充分利用 26rem 的空间 */
+    /* 彻底解除目录文字层层嵌套的紧箍咒，让它们放心大胆地往右边伸展 */
+    .md-nav--secondary,
+    .md-nav--secondary .md-nav__list,
+    .md-nav--secondary .md-nav__item,
     .md-nav--secondary .md-nav__link {
+        width: 100% !important;
         max-width: 100% !important;
     }
 
-    /* ======== 中间主体内容区（完美的分割线方案） ======== */
-    /* 我们把线画在中间正文区域的左右两侧，这样线就会永远贴着内容！ */
+    /* ======== 中间正文区域 (贯穿线与边距) ======== */
     .md-content {
-        padding-left: 2.5rem !important;  /* 正文与左线的呼吸感间距 */
-        padding-right: 2.5rem !important; /* 正文与右线的呼吸感间距 */
-        border-left: 2px solid var(--md-default-fg-color--lightest) !important;
-        border-right: 2px solid var(--md-default-fg-color--lightest) !important;
-        
-        /* 【核心修复】强制中间内容区域至少有 100% 的屏幕高度 */
-        /* 这样即使你的某篇笔记只有一行字，左右两边的细线也会一直贯穿到屏幕最底端！ */
-        min-height: 100vh !important; 
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
+        /* 画出两条完美的贯穿线 */
+        border-left: 1px solid var(--md-default-fg-color--lightest) !important;
+        border-right: 1px solid var(--md-default-fg-color--lightest) !important;
+        /* 保证就算你只写了一个字，线也会一直画到屏幕最底端！ */
+        min-height: 100vh !important;
     }
 }
