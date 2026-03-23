@@ -1,0 +1,1133 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="个人技术文档与学习笔记">
+      
+      
+        <meta name="author" content="emptyalley992">
+      
+      
+        <link rel="canonical" href="https://emptyalley992.github.io/note/01_study/Quant/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">
+      
+      
+        <link rel="prev" href="../../ML/tmp/">
+      
+      
+        <link rel="next" href="../../../02_env_setting/python/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>一、金融概念 - 学习笔记</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="学习笔记" class="md-header__button md-logo" aria-label="学习笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            学习笔记
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              一、金融概念
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/emptyalley992/note" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    emptyalley992/note
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="学习笔记" class="md-nav__button md-logo" aria-label="学习笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    学习笔记
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/emptyalley992/note" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    emptyalley992/note
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 study
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    01 study
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../NeuralOperator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NeuralOperator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ML
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ML
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/tmp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tmp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quant
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Quant
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一、金融概念
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一、金融概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (一) 期权交易过程
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 env setting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    02 env setting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02_env_setting/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (一) 期权交易过程
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">一、金融概念<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">(一) 期权交易过程<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>1.1 权利金（Premium）​
+期权买方为获得权利而支付给卖方的费用，也是卖方的收入。
+- 在大多数语境下，​期权价格=权利金（Premium）​​，但期权价格更强调市场定价，权利金更强调费用属性。</p>
+<p>1.2 保证金（Margin）
+交易结束后会返还，平仓或到期后释放
+  - 初始保证金：开仓时需缴纳的最低资金，确保开仓时有足够资金覆盖初始风险
+  - 维持保证金(Maintenance Margin)：持仓期间需维持的最低资金水平(账户资金) ， 防止价格波动导致账户资金不足，触发强制平仓
+1.3 moneyness
+  - moneyness：价值状况 虚实度 平价状况  K/S(行权价/标的当前价格)
+  - forward moneyness：远期平价程度，基于option到期时的远期价格衡量 
+1.4 波动率曲面IVS（ Implied Volatility Surface）
+  表示不同期权的隐含波动率随行权价（strike price）和到期时间（maturity）的变化的三维图形或模型
+    - 隐含波动率（IV）：指期权市场根据当前市场价格反推出来的波动率。与历史波动率不同，隐含波动率是市场对未来波动性的预期。
+    - 行权价（Strike Price）： 或用虚实度 moneyness 
+    - 到期时间（Maturity）：期权的有效期，表示从现在到期权到期的时间长度。
+  IVS的三个维度：
+    - X轴：通常表示期权的行权价（或moneyness，虚实度）。
+    - Y轴：通常表示期权的到期时间。
+    - Z轴：表示隐含波动率（IV）。
+  具体体现
+  - 期限结构(term structure)：隐含波动率随时间如何变化
+  - 波动率偏离度（skew）：给定到期时间下的所有行权价格与波动率组合。偏离度通常被引用为95％和105％的波动率之差（或者90％和100％）。
+1.5 做多(空)波动率
+- 做多波动率：你赌的是标的资产价格将 “大动”——无论是大涨还是大跌。你预期未来的实际波动将大于当前期权价格中蕴含的隐含波动率。
+- 做空波动率：你赌的是标的资产价格将 “不动” 或 “小动”。你预期未来的实际波动将小于当前的隐含波动率。
+（1）做空波动率（希望小波动或隐含波动率(IV)下降
+期望发生的现象：市场平静，标的价格窄幅震荡；价格波动越小，你卖出的期权价值衰减得越快，盈利就越大。
+  - 方式A：持有到期（赚取全部时间价值）
+    - 期望：标的资产价格在到期前保持稳定，你卖出的期权变得毫无价值。
+    - 盈利实现：期权到期作废，你最初收到的全部权利金成为净利润。
+    - 适用场景：这是最理想但风险较高的方式，需要市场极度配合。
+  - 方式B：提前平仓（赚取部分时间价值 + IV下降带来的价差）【更常见、更主动】
+    - 期望：市场波动性下降，即隐含波动率（IV）快速下跌。这通常发生在重大风险事件（如财报、美联储决议）落地后，“不确定性”消除，市场恐慌情绪缓解。
+暂时无法在飞书文档外展示此内容
+（2）做多波动率（希望波动性加剧，隐含波动率(IV)上升，价格剧烈波动
+- 方式A：提前平仓（赚取IV上升和方向波动的价差）【最主要方式】
+  - 盈利实现：
+    1. IV上升：在重大事件发生前，市场不确定性增加，IV会攀升。你买入的期权价值会随之增加，即使股价还没动
+    2. 方向性波动：标的价格出现预期中的大涨或大跌，直接推高看涨或看跌期权的内在价值和时间价值。</p>
+<p>暂时无法在飞书文档外展示此内容</p>
+<p>二）概述
+1.历史风险溢价收益率（Historical Risk Premium）
+- 是指股票市场的历史平均收益率与无风险利率（通常由国债收益率表示）之间的差额。
+- 反映了投资股票市场相对于无风险资产（如国债）所承担的额外风险的回报。
+2.即期国债利率（Spot Rate）
+即期利率是指当前时点上的短期利率，通常是你可以立即获得的无风险利率。
+3.远期利率（Forward Rate）
+- 是指未来某一时点上，基于现有即期利率和市场预期，预计的某一特定期限的利率。
+- 比如 “ 1年期远期利率 “ 是指，在1年后开始的1年期国债的预期利率。
+4.指数（Index）​
+- 指数是反映一组股票（或其他资产）整体价格表现的统计指标。本身不可直接交易，仅作为市场表现的参考。成分股会定期调整（如季度或年度调整）
+  - 上证50指数（SSE 50）A股​​：由上海证券交易所市值最大的50只股票组成，反映大盘蓝筹股表现。
+  - 沪深300指数（CSI 300）A股​​：A股流动性最强的300只股票。
+  - 标普500指数（S&amp;P 500）美股​​​：美国500家大型上市公司股票的组合。
+  - 港股​：恒生指数（HSI）。
+- 分类：
+  - 股票指数（Stock Index）​：反映一组股票整体价格表现的统计指标。
+  - 债券指数（Bond Index）：跟踪债券市场或特定债券组合表现的指数。
+  - 商品指数（Commodity Index）​：反映大宗商品（如能源、金属、农产品）价格变动的指数。
+  - 货币指数（Currency Index）​：衡量一篮子货币对基准货币（如美元）的综合汇率表现。
+  - 波动率指数（Volatility Index）​​：反映市场对未来波动率的预期，通常基于期权价格计算。
+5.ETF（Exchange-Traded Fund）​交易型开放式指数证券投资基金
+- ETF是一种在交易所上市交易的基金类型（一类），跟踪特定指数、商品或资产组合。像股票一样实时交易，流动性高。管理费低（相比主动管理型基金）。持仓透明（每日公布成分股）。
+  - 华夏上证50ETF（510050）​​：跟踪上证50指数，其价格走势与指数高度相关。
+  - SPDR S&amp;P 500 ETF（SPY）​​：跟踪标普500指数。
+- ETF通常由基金管理公司管理，基金资产为一篮子股票组合，组合中的股票种类与某一特定指数（如上证50指数）包含的成份股票相同，股票数量比例与该指数的成份股构成比例一致。指数调整，ETF投资组合要作相应调整
+ 6.股息
+- 定义​：上市公司将部分利润以现金或股票形式分配给股东的行为。例：若你持有100股贵州茅台，每股分红10元，你将获得1000元现金股息。
+(1)指数的股息
+  - 指数的股息​：指数成分股的公司分红汇总后，会计算出一个指数股息率​（Dividend Yield）。
+  - 股息是股票收益的一部分（总收益 = 价格涨幅 + 股息）。股息高的指数（如红利指数）通常波动较低，适合稳健投资者。
+(2)ETF的股息
+  - ETF的股息来源​：ETF持有的一篮子股票分红会汇总，由基金管理人分配给ETF持有人。ETF分红会降低基金净值（除息日价格下跌）；长期持有高股息ETF可获取稳定现金流
+  - 分配方式​：
+    - 现金分红​：直接发放现金（如华夏上证50ETF每年分红1-2次）。
+    - 红利再投资​：自动用股息买入更多ETF份额（如部分美股ETF）。
+7. 股票市场：T+0、T+1市场
+- T+0”指的是当天买入的证券，在当天就可以卖出
+  - 投资者在交易日（T日）买入一只股票后，可以立即（或在同一交易日内）将其卖出。
+  - 卖出股票后获得的资金，可以立刻用于购买其他股票，实现了资金的日内循环使用。
+  - 美股、港股
+- “T+1”指的是当天买入的证券，至少要等到下一个交易日才能卖出
+  - 卖出后资金立即可用于买其他股票，但T+1日才可提现
+  - 中国大陆A股主板是实行T+1制度的典型代表，科创板和新三板的有些交易机制已经具备了类似T+0的灵活性
+三）套利策略
+套利策略分类（上下边界套利、垂直价差套利、凸性套利、平价套利、盒式套利）
+- 套利来源于期权价格违反无套利价格区间。
+- 四大套利策略：边界套利（单期权）、垂直价差套利（两合约）、凸性套利（三合约）、平价套利（看涨看跌对），以及盒式套利（看涨看跌跨行权组合）。</p>
+<p>四）研报笔记 20250918
+  - 【策略研究】期权策略全攻略，玩转市场波动：https://mp.weixin.qq.com/s/-5VN34UsF7frkaZdliV52Q
+  - 【策略报告】中泰期货量化期权策略报告合集：https://mp.weixin.qq.com/s/Vd_EKF1Amz2C1A-Bv1tOsQ
+  - 中金：期权隐含波动的多重观察与择时应用：https://mp.weixin.qq.com/s/iSZRO6fLS8ANscLeaoZ8fg
+研报一、【策略研究】期权策略全攻略，玩转市场波
+（一）分析框架：构建期权策略的三维认知模型
+基于市场预期的策略构建：
+(1)若预期标的价格单边上涨且波动率温和，可构建“牛市价差策略”（买入低行权价 Call + 卖出高行权价 Call），通过限制上端收益来降低权利金成本；
+(2)若预期波动率上升但方向不明，可构建“跨式策略”（买入平值 Call + 平值 Put），利用波动率上升时期权权利金的非线性增长获利；
+(3)若预期市场陷入窄幅震荡，可构建“铁蝶策略”（买入平值 Call/Put + 卖出两侧虚值 Call/Put），通过赚取时间价值和波动率下跌收益盈利
+（二）基本概念：期权策略的理论基石
+1. 策略分类的底层逻辑
+(1)方向性策略：核心是对Delta 敞口的管理，包括单一期权策略（如买入 Call、卖出 Put）和组合策略（如牛市价差、熊市价差）。此类策略的盈利来源是标的价格的方向性变动，适合趋势明确的市场，但需警惕波动率下降导致的权利金贬值。
+- 盈利逻辑A：买入看涨期权（Bull Call）的实战场景——持有至到期
+  - 优势在于以有限亏损博取高杠杆收益，适合对短期趋势有强烈信心的场景（如事件驱动型行情）。
+- 盈利逻辑B：备兑开仓（Covered Call）的风险收益特征——持有至到期
+  - 该策略本质是 “用上端收益换取下行保护”，适合温和看涨或震荡市中的收益增强。
+(2)波动率策略：通过Vega 敞口捕捉波动率变化，或通过 Theta 赚取时间价值，包括跨式（Straddle）、勒式（Strangle）、波动率套利（Volatility Arbitrage）等。例如，跨式策略在波动率上升时盈利，但在波动率下降或价格横盘时亏损，因此常配合止损策略（如波动率跌破历史均值时平仓）。
+A：跨式策略（Straddle）的盈亏平衡点计算
+持有至到期时：该策略的盈利逻辑是 “波动率上升幅度超过权利金成本”，典型应用场景包括财报发布前、重大政策落地前等不确定性较高的时段。
+B：波动率微笑（Volatility Smile）的套利机会
+实证发现，虚值Put 期权的隐含波动率通常高于平值和实值期权，形成 “微笑曲线”。这是因为市场对尾部风险（标的暴跌）的定价更高。投资者可利用这一现象构建 “波动率偏斜策略”，例如，某标的平值 Put 波动率为 20%，虚值 Put 波动率为 25%，通过卖出虚值 Put、买入平值 Put 并动态对冲 Delta，可在波动率回归时获利。
+(3)套利策略：利用期权合约间的定价偏差（如期现套利、水平套利、垂直套利），通过对冲Delta、Gamma 等风险获取无风险或低风险收益。例如，当同一标的的近月 Call 与远月 Call 存在不合理价差时，可通过买入低价合约、卖出高价合约构建套利组合，待价差收敛后获利离场。
+[图片]</p>
+<p>[图片]
+2. 动态调整的核心技术
+(1)Delta-Gamma 对冲（Dynamic Hedging）的实操流程
+动态对冲的频率取决于市场波动幅度：波动率高时每日对冲，波动率低时每周对冲。需要注意的是，对冲成本（交易佣金、滑点）会侵蚀策略收益，因此需在对冲精度与成本间寻找平衡。
+(2)波动率拐点的策略调整
+当观察到隐含波动率从高位开始回落（如VIX 指数从 30 降至 25），且标的价格进入横盘状态时，持有跨式策略的投资者应考虑平仓或转为卖出波动率策略（如铁鹰策略），因为波动率下降会导致期权权利金贬值，而时间损耗加速。反之，当波动率从低位突破（如 VIX 从 15 升至 20），且标的出现趋势信号时，可增加 Vega 敞口，买入跨式或勒式策略
+（三）策略容量：资金规模与市场流动性的边界
+1.影响策略容量的核心因素
+(1)期权合约的流动性阈值
+因此，流动性阈值通常设定为单策略交易量不超过日均成交量的 5%，即 10 万手 ×5%=5000 手
+(2)标的市值与流动性的匹配度
+大盘股（如茅台、宁德时代）期权流动性好，策略容量大；小盘股期权流动性差，策略容量小。
+研报二、中金：期权隐含波动的多重观察与择时应用
+近期关税事件导致市场总体波动较大。我们构建了A股主要指数的VIX指标，并使用Spline插值法构建了不同指数期权的隐含波动率曲面（IV surface），在曲面中采样IV并构造看跌看涨情绪比策略，发现该策略在三种指数上均有一定择时效果。在中证1000指数中多头择时的效果最好，使用IM当月合约作为交易标的绝对收益率年化达22.3%，信息比率超1.7。
+（一）VIX指标指示市场波动预期有效，但择时效果整体较弱
+VIX（Volatility Index，波动率指数）是由芝加哥期权交易所（CBOE）编制的金融市场基准指标，用于衡量标普500指数未来 30 个自然日(20个交易日)的预期波动性。其核心机制基于标普500指数期权的隐含波动率，通过无模型法（Model-Free）对近月及次月期权合约价格进行加权计算，以反映市场参与者对短期风险波动的共识预期
+VIX在美国之所以受到较高关注，部分是因为VIX的顶部往往对应市场恐慌情绪的顶点，未来大概率会修复超卖的下跌缺口，此时一般能对应到可以指示股票市场的底部，而A股则不具备这一特点。主要原因是A股和美股的涨跌节奏不同：美股的牛市长而慢，熊市短而快，A股则不尽然。因此即使VIX短期处于顶部，此时也不一定对应A股的底部，整体择时效果较弱。
+从定义上来说，VIX本质上是通过model-free的方法，在无套利条件下，对于期权标的未来30天方差互换合约定价的离散化近似，其计算可以不依赖如BSM这样特定的定价模型。计算方式更简洁，无需使用数值方法近似。但我们知道挂钩同一标的的期权产品可以有丰富的合约种类，VIX方法计算出的波动率维度比较单一，无法更精准地捕捉对于不同到期期限和不同价值深度的期权特征。因此我们尝试进一步探索隐含波动率曲面更丰富的市场情绪信息。
+（二）IV好但原插值法不行，Spline插值法构建稳定IV曲面<br />
+1. VIX信息单一，隐含波动率曲面丰富
+VIX的信息较为单一，而隐含波动率数据维度更广，蕴含的信息更丰富。因为挂钩每一指数的期权每一天都会有数量丰富的合约，分布在到期期限和价值深度两个维度上。因此每一个指数挂钩的期权产品的隐含波动率都可以形成一个隐含波动率曲面，曲面上不同的点代表了市场对不同期权的定价，也暗示了某种期权被交易的热度。一般来说隐含波动率曲面的点均由虚值期权计算得到。也即由执行价格小于指数价格的看跌期权和执行价格高于指数价格的看涨期权组成。
+当我们固定到期期限做一个价值深度维度的切片，会得到“波动率微笑”。从波动率微笑看出，如果左侧的隐含波动率值越大，那么说明此时看跌期权的交易热度越高，右侧的IV越大，说明看涨期权的交易热度越高。通过对波动率曲面或微笑上的虚值看跌或者看涨期权的隐含波动率采样并计算相应比值，我们可以得到特定价值深度的看跌或是看涨期权的相对热度，反应期权市场对于底层资产情绪是高还是低。在《衍生品系列报告（2）：期权隐含波动率中的择时信息》中发现，相应的隐含波动率比值对于未来一段时间的底层指数的涨跌有一定的指示作用(择时效应)
+2. IV曲面为什么要插值处理&amp;wind缺陷
+但是期权相关的指标在计算时常面临到期期限随着时间流逝持续变化的问题，这会导致使用当月期权合约计算出的虚值期权IV比值序列出现周期性的变化，并不平稳且异常值较多，减弱指标的平稳性和可靠性
+因此想要获得稳定到期期限的期权指标，一般会使用每日不同到期期限和不同价值深度的期权合约的隐含波动率进行插值处理，得到一个相对平滑和连续的曲面，在曲面上去固定到期期限和价值深度的隐含波动率指标值，得到相对平稳，没有明显季节性的指标序列。
+wind的插值方法有效果但是也有缺陷
+3. spline插值法更好
+Wind隐含波动率构建的比值指标序列未通过波动率的平稳性检验，因此我们重新设计插值的方法来计算隐含波动率比值择时指标，我们的插值方法主要使用的是spline插值法，该插值法在时序上总体稳定，且与Wind前期的插值法做出指标走势基本相符，计算出的指标相应更加平稳，和原值对比下误差更低。</p>
+<p>（三）IV情绪指标择时效果显著，持仓期指可进一步加强
+1. 择时策略
+- 策略思路：期权的隐含波动率择时测试逻辑如下，当看跌期权的隐含波动率和看涨期权的隐含波动率的比值超过一定阈值时，则意味着期权市场的悲观情绪已经到达一定程度，未来大概率将发生反转。
+- 具体策略：具体做法是在做好每日的隐含波动率曲面插值后，将固定1月到期的-15%虚值看跌期权和15%虚值看涨期权的隐含波动率相除，并取过去3个月滚动分位值来判断相对大小，当分位数到达m以上时使用下一个交易日的开盘价开多仓并持续持有5个交易日后平多仓。
+2. 指数期权-收益效果：
+  - 我们将该指标在上证50ETF、沪深300ETF和中证1000指数期权上统一测试发现，期权IV情绪指标在多种指数上均有一定择时效果。
+  - 构造多头择时策略测试上证50ETF期权择时策略绝对年化收益率可以达到5%，超额收益率8%；沪深300ETF期权择时策略绝对收益率达7%，超额收益率9%。中证1000指数期权的效果相对最好：绝对收益率年化可达18%，超额收益24%，信息比率为1.75。从简单的分组平均收益率我们看到初步测试不同分组的百分位对应的未来5日收益率具有一定单调性，且单调性主要由胜率主导，第九分组的日度胜率可达66%。
+  - 我们发现该策略的主要驱动因素为胜率的单调性而非盈亏比。
+3. 策略落地 ETF
+  - 在策略落地方面我们首先考虑使用三类宽基指数的ETF来实现，我们发现对于上证50（5100 50.SH）和沪深300ETF（510300.SH）作为标的的策略表现和指数作为标的的表现基本一致。由于目前市面上只有中证1000的指数期权，使用ETF落地（512100.SH）的策略会有1个点左右的损耗。
+4. 策略落地 IM（中证1000股指期货合约）
+  - 由于长期以来我国股指期货处于贴水状态，因此持有股指期货多头可以进一步提升策略表现，获得相对指数多头更高的超额收益，因此我们可以选择相应的宽基股指期货合约来落地上述多头策略，尤其是对于贴水较深的中证1000股指期货来说效果更加显著。
+  - 由于股指期货合约存在换仓时点选择的问题，我们测试了交割日当天到交割日前4天的收益表现发现，在交割日前2-3天时会对策略有更好的增强效果。使用中证1000股指期货作为交易标的绝对收益率年化可达22.3%，超额收益可以达到28.5%，信息比率超1.7，测试不同换仓时点对于期货增强效果的区别后，我们发现提前3天换仓的IM多头策略相对ETF实现的策略年化收益率具有5.6ppt的增强效果
+（四）总结
+近期关税事件导致市场总体波动较大。我们利用上证50ETF期权、沪深300ETF期权和中证1000指数期权数据复现了芝加哥商品交易所的VIX指标，发现VIX指标可以即时地反映期权市场对于未来短期市场波动的预期。但与美股VIX顶部与大盘底部清晰的对应关系不同，A股指数计算的VIX无法作为有效的择时指标。我们因此使用Spline插值法构建了不同指数的隐含波动率曲面，并通过曲面看跌期权与看涨期权隐含波动率比值的关系构建期权市场的交易情绪指标。我们利用该指标的历史百分位关系构建相应的择时策略，发现在三种指数的择时上均有一定择时效果。在中证1000指数中多头择时的效果最好，使用中证1000股指期货作为交易标的绝对收益率年化可达22.3%，超额收益可以达到28.5%，信息比率超1.7，整体择时效果显著。
+研报三、【策略报告】中泰期货量化期权策略报告合集
+- 合集内容
+  - 交易策略相关研究6篇（主题2、主题4、主题5、主题6、主题7、主题8）
+| 在策略方面，本报告针对卖权策略、备兑策略、Gamma Scalping等进行了详细分析，对策略中的收益来源及策略自身的风险收益特征进行了总结。
+  - 美式期权定价梳理1篇（主题3），期权隐含信息研究1篇（主题1）
+| 在定价方面，本报告主题3结合我国商品期权市场介绍了两种较为常用的美式期权定价方法。
+  - 期权风险管理研究2篇（主题9、主题10）。
+| 在风险管理方面，本报告分别观察了商品及股票市场中的一些特征指标，且利用期权进行择时对冲，结果表明在不同市场中，使用期权进行对冲均可以取得一定效果。
+主题1：无模型波动率指数数学推导及策略设计
+（一）波动率的分类及其含义
+- 历史波动率：即将资产价格历史数据作为计算波动率的依据，通过对历史收益率（可以为简单收益率或对数收益率）的标准差来估计资产的波动程度。
+- 已实现波动率
+当n很大，时间间隔很小时才成立
+[图片]
+- 隐含波动率：解释为市场上投资者对于标的资产从当前时点至期权合约到期日之间波动程度的预期
+（二）无模型波动率的求解推导；（三）基于场内期权的波动率指数的编制（参考VIX）；（四）基于波动率指数的期权卖出策略举例分析——波动率往往具有均值复归特性
+（五）总结
+随后结合国内期权市场的数据，编制国内三大指数的波动率指数，并简要分析其与指数本身的涨跌情况的相关关系，可以看出国内波动率指数与指数本身之间的相关关系并没有国外市场显著。随后站在期权卖方的角度设计一个动态对冲组合说明在波动率较高的环境下可以考虑卖出期权获取波动率变动带来的vega正向收益，但同时需要重点关注标的资产价格实际变动带来的二阶影响，即gamma风险
+主题2：期权卖权策略收益来源实证分析
+（一）卖权策略介绍
+在期权卖权策略中，根据交易目的的不同可以大致分为两类。
+  - 第一，当投资者认为期权的波动率大于理论值时，可以通过卖出期权同时对冲其他风险敞口获得正向收益。收益情况取决于对波动率的判断是否准确，以及收益是否可以完全覆盖对冲成本。
+  - 第二，利用期权时间价值的衰减，卖出期权通过不断滚动展期获得较为稳定的收益。通常需要考虑两问题。
+    - 首先，持续卖出期权需要思考是否可以承担由于期权标的资产价格变化及期权隐含波动率变化带来的风险，所以在策略实施过程中不同风险敞口的控制就显得尤为重要。
+    - 其次，卖出合约的选择需要兼顾合约的市场流动性以及时间价值衰减的速率。
+本报告主要针对第二类卖权策略做一个初步分析。
+（二）期权卖权策略的回测
+设置初始资金100万元，从回测期期初开始，选择距离当天到期时间最短的看涨期权合约进行卖出。合约临近期权到期日时进行展期。考虑到沪深300ETF期权近月合约的流动性，根据上述规则分别卖出平值、虚值一档、虚值二档、虚值三档的看涨合约进行回测
+虚值程度较低的期权构成的投资组合相对于期权标的资产价格变动更为敏感，虚值程度较高的期权组合在标的资产价格向不利方向变动时回撤程度会更小</p>
+<p>主题3：美式期权定价
+一、BAW美式期权定价
+BAW期权定价模型是国内期货交易所（如大连商品交易所、广州期货交易所）常用美式期权定价方法，用于计算新上市期权合约的挂牌基准价。由于美式期权赋予投资者在到期日前自由行权的权利，故相比于欧式期权，美式期权的定价复杂性较高，难以找到美式期权定价的精确公式，我们可以采用BAW模型等封闭式近似算法对期权价格进行估计。从本篇报告起，我们将对常见的、计算便利的美式期权定价模型进行介绍。
+Barone、Adesi和Whaley（1987）提出用二次近似方法对美式认购和认沽期权进行定价，即BAW期权定价模型，该模型思想将美式期权价值写成欧式期权价值与提前行权溢价之和。美式认购期权定价公式如下：</p>
+<p>[图片]</p>
+<p>[图片]
+[图片]</p>
+<p>二、Ju &amp; Zhong美式期权定价
+主题4：波动率回落环境下卖出看涨期权策略
+一、策略构建
+根据BSM定价原理，期权价格关于波动率是严格单调的，标的资产波动率越大，期权的价格越高。
+通过历史分位数来衡量当前波动率的高低。本报告通过收益率的标准差来刻画历史波动率，再通过过去一段时间波动率高分位来判断当前波动率是否较高（如将当前的波动率与过去一年波动率的90分位进行比较）。若当前波动率高于历史高分位，则认为当前处于波动较高的环境。
+在波动高位回落的环境下采取卖出看涨期权的策略。
+二、回测分析
+（一）历史波动率一年期高分位为开仓信号依据
+从收益的角度来看，在波动回落环境下卖虚一档的看涨期权优于虚二档和虚三档。
+（二）历史波动率三年期高分位为开仓信号依据
+三年期高分位策略的净值较一年期高位分最终净值更大，波动也更大。在收益角度，三年期高分位的虚一档同样优于虚二档和虚三档。
+通过上述数据表明，波动回落条件下的卖出看涨期权的策略的投资机会较少，但具有稳定且较强的盈利能力。当信号触发，投资者可根据自己风险和收益偏好来构建策略</p>
+<p>主题6：基于上证50ETF期权的Gamma Scalping策略解析
+当买入期权时，在Gamma维度可以得到稳定收益而在Theta维度会因为时间的流逝逐渐失去合约的时间价值。
+期权的卖权策略收益率具有很明显的左偏特征。也就是说，在大部分情况下，选择合适的期权合约可以克服Gamma端的损失获得较为稳定的正收益，但一旦发生极端行情，策略将会在Gamma维度产生非常大的损失，从而发生回撤。
+一、Gamma Scalping策略的交易方法
+- 策略
+  该策略首先建立一个Straddle组合，即买入平值的看涨和看跌期权。此时，组合的Delta敞口接近于0，Gamma与Vega为正，Theta为负。但随着标的资产价格的变化，期权组合在各个希腊字母维度的敞口也会发生变化。例如当建立Straddle组合时，期权组合的Gamma值较大，这将会导致Delta敞口在短时间内发生非常大的变化。Gamma Scalping策略考虑在建立Straddle后对Delta敞口进行动态调整，使得组合Delta值始终接近于0，那么在市场波动的环境下则可以起到“高抛低吸”的效果。
+- 示例
+该策略也可以在下图中进行展示，横轴表示期权标的资产的价格，纵轴表示期权的价值。在0时刻通过买入一份平值看涨一份平值看跌期权（执行价格K=S0）建立一个Straddle组合，到期的收益结构如图中黑色实线所示，未到期之前的期权组合价值如图中黑色虚线所示，两者之间的差额为期权组合的时间价值。
+[图片]
+1. 在建立Straddle组合期初，Delta值接近于0，Gamma值为正（绝对数值随合约到期期限减小而增大），Vega值为正（绝对数值随合约到期期限减小而减小），Theta值为负（绝对数值随合约到期期限减小而增大）。
+2. 随着时间流逝，期权标的资产价格会发生变动。假设从0时刻至1时刻，期权标的资产价格从S0下降到S1，那么可知期权组合的Delta从接近于0变为负值（期权组合Delta值可理解为图中黑色虚线在S=S1点处的斜率），为了保持组合Delta中性，应该在1时刻以S1价格买入标的资产，获取正Delta值，以此对冲期权组合的Delta敞口。
+3. 截至2时刻标的资产价格从S1上升到S2（S2=S0），为了持续保持组合的Delta值接近于0，投资者将以价格S2（S2=S0，S2&gt;S1）卖出标的资产。
+4. 通过以上操作（以价格S1买入标的资产并以价格S2卖出），在构建Straddle组合并持续保持Delta中性的同时，变相完成了标的资产的“高抛低吸”。
+5. 在Gamma Scalping过程中虽然表面上标的资产通过“高抛低吸”获得了盈利，但其收益会被期权组合Delta维度上的损失相抵消，故该策略的实质收益来源为Gamma
+[图片]
+1. 在建立Straddle组合期初，Delta值接近于0，Gamma值为正（绝对数值随合约到期期限减小而增大），Vega值为正（绝对数值随合约到期期限减小而减小），Theta值为负（绝对数值随合约到期期限减小而增大）。
+2. 随着时间流逝，期权标的资产价格会发生变动。假设从0时刻至1时刻，期权标的资产价格从S0下降到S1，那么可知期权组合的Delta从接近于0变为负值（期权组合Delta值可理解为图中黑色虚线在S=S1点处的斜率），为了保持组合Delta中性，应该在1时刻以S1价格买入标的资产，获取正Delta值，以此对冲期权组合的Delta敞口。
+3. 截至2时刻标的资产价格从S1上升到S2（S2=S0），为了持续保持组合的Delta值接近于0，投资者将以价格S2（S2=S0，S2&gt;S1）卖出标的资产。
+4. 通过以上操作（以价格S1买入标的资产并以价格S2卖出），在构建Straddle组合并持续保持Delta中性的同时，变相完成了标的资产的“高抛低吸”。
+5. 在Gamma Scalping过程中虽然表面上标的资产通过“高抛低吸”获得了盈利，但其收益会被期权组合Delta维度上的损失相抵消，故该策略的实质收益来源为Gamma
+- 注意
+  - 为了避免到期前期权合约时间价值的加速衰减，一般会选取到期期限非近月的合约。根据Vega值的期限结构可知，远月平值合约的Vega值较大，故在实施策略时，应该充分考虑隐含波动率相对水平和变动方向的影响。也就是说该策略除了考虑Gamma端收益能否克服Theta端带来的时间价值损失以外，还应该充分考虑期权隐含波动率带来的影响。
+  - 其次，当标的资产价格呈现单方向变动，该策略的效果将会不佳，具体原因为：第一，标的资产价格变动的Delta端收益将被现货相反头寸所对冲。第二，当标的资产价格远离执行价格时，期权处于较为实值或虚值的状态，其Gamma的绝对数值会快速降低，在该维度同样难以获得较高的收益。第三，通常来说当标的资产从震荡转换为趋势行情一段时间后，期权的隐含波动率会持续下降，在Vega端会给策略带来不良影响。
+二、总结
+本报告通过分析Gamma Scalping策略的交易方法得出，该策略将会在Gamma和Vega端有较大正向敞口，在Theta端有较大负向敞口，所以当Gamma端收益可以覆盖期权时间价值的衰减且隐含波动率处于低位时（或有上涨趋势时）建仓是最为合理的
+主题9：从沽购持仓比看商品期权保险功能
+一、沽购持仓比的含义
+期权持仓量是指某个时点期权合约上投资者持有全部未平仓合约的数量，直观反映流入期权合约的资金量，还代表多空双方对价格走势看法的分歧程度，是分析期权市场运行质量和保险功能发挥情况的一项指标。
+沽购持仓比则是指某个时点全部认沽期权合约持仓量与全部认购期权持仓量的比值。如果沽购持仓比较高，表明投资者持有认沽期权的意愿高于认购期权，资金流入认沽期权合约的数量更多，反之则反是。
+在标的商品期货价格上涨过程中，如果沽购持仓比同时攀升，表明认沽期权多头持仓明显高于认购期权多头持仓，投资者对标的商品期货潜在下跌风险的保护意愿增高，期权发挥其保险功能之表现凸显。在标的商品期货价格下跌过程中，若沽购持仓比同时回落，即认沽期权多头持仓逐步低于认购期权多头持仓，则表明认沽多头平仓意愿相对增加，保险意愿相对减少。从这一角度来理解，沽购持仓比走势与标的商品期货价格走势之间的相关性，可在一定程度上反映商品期权保险功能发挥情况。
+主题10：沪深300股指重大风险预警系统及对冲研究</p>
+<p>（附录、相关名词
+1. 看跌看涨情绪比（Put-Call Ratio, PCR）：
+  是一个常用的市场情绪指标。通常的计算方式是：看跌期权的成交量（或未平仓合约量） / 看涨期权的成交量（或未平仓合约量）。
+  - PCR升高： 意味着买入看跌期权（用于做空或对冲下跌风险）的行为相对更活跃。这通常被解读为市场情绪悲观、谨慎、恐惧。
+  - PCR降低： 意味着买入看涨期权（用于做多）的行为相对更活跃。这通常被解读为市场情绪乐观、贪婪。
+  - 注意： 这是一个 contrarian indicator（逆向指标）。极端高的PCR（市场极度恐惧）往往预示着市场可能超卖，即将见底反弹；极端低的PCR（市场极度贪婪）往往预示着市场可能超买，即将见顶回落。
+2. 择时（Market Timing）：
+  - 定义： 指试图预测金融市场（如股票指数）未来短期走势的方向（上涨、下跌或横盘），并据此调整投资组合（例如在预测上涨前买入）的行为。目标： 超越简单的“买入并持有”策略，获得更高的风险调整后收益。
+- 择时效果（Timing Effect）：
+  - 定义： 指一个策略或一个指标能够有效、显著地预测市场短期走势的能力。如果策略发出了“上涨”信号后，市场在未来一段时间内确实上涨的概率显著高于随机猜测，就说这个策略具有“择时效果”或“择时能力”。
+3. 贴水（Discount）&amp; 升水（Premium）
+通常与升水（Premium） 相对出现。它最核心的含义是：某一资产的交易价格低于其参考价格或理论价格的状态。
+- 在期货市场（最常用的场景）定义： 指期货价格低于其标的资产的现货价格的状态。
+- 在外汇市场 定义： 指远期汇率低于即期汇率的状态。
+- 股指期货出现贴水是市场多种力量博弈的结果，主要原因包括：
+  - 套利机制受限： 理论上，如果期货价格过低，套利者可以买入期货、卖出现货来赚取无风险收益。但在A股市场，卖空现货（融券）成本较高、操作不便，使得这种“反向套利”难以进行，无法快速消除贴水。
+  - 对冲需求旺盛（核心原因）： 这是A股市场持续贴水的最主要因素。许多机构投资者（如公募基金、保险资金）持有大量股票现货。为了规避市场下跌的风险，它们需要在期货市场上卖出股指期货（开空仓）进行对冲。大量的卖出单会压制期货价格，导致其低于现货价格，从而形成贴水。
+  - 市场情绪悲观： 当投资者对未来市场走势预期悲观时，愿意以更低的价格卖出期货，这也会导致贴水的出现或扩大。
+  - 股息因素： 由于股指的成分股会分红，分红会导致指数点数自然下降。期货价格会预先扣除这部分预期股息，因此在分红集中的季节，贴水会季节性扩大。
+4. 展期（Rollover）操作：
+时机：当当前持有的短期期权合约即将到期时（通常是在到期日前1-3天，具体需明确），进行展期操作。
+  关闭当前即将到期的头寸的同时，在更远的期限上建立方向相同的新头寸（开仓一份新的“距离当天到期时间最短的期权”），从而将持仓延长到未来的某个时间点。</p>
+<ol>
+<li>B</li>
+<li>a</li>
+</ol>
+<p>（二）期权
+讨论一
+1.基本概念
+指赋予其购买方在规定期限按买卖双方约定的价格或购买或出售一定数量某种金融资产（称为标的资产（Underlying Assets））权利的合约
+行权价：约定的价格
+权利金（期权价格）：为购买权利而支付给期权出售方
+合算就行权，不合算就弃权
+1.1 看涨期权、看跌期权的多头、空头
+看涨：C              看跌：P
+1.2 分类
+欧式期权：到期时才可行权
+美式期权：合约内每个工作日均可行权
+百慕大期权：到期时及到期前一段时间可行权
+1.3  2 期权的价值：内在价值与时间价值
+2.1 内在价值：当前多合算
+实值期权、平值期权、虚值期权
+2.2 时间价值：波动带来的额外价值
+影响因素：剩余时间、标的资产价格的波动率、内在价值
+1.4   2.与其他几种金融手段的对比
+现货：立即以当前市场价格买卖实物商品或金融资产，并通常在短期内（如1-3个交易日）完成交割。
+即时交易、实物交割
+期货：标准化合约，约定在未来某一时间以特定价格买卖标的资产（如商品、股指、货币等）
+杠杆交易、双向交易、到期交割：
+期权：购买权利
+2.交易策略</p>
+<p>3.希腊字母
+证券组合中性质
+4.1 波动率
+从价格倒推未来波动率：
+Black-Scholes
+无模型隐含波动率
+4.2  delta：Δ
+看涨期权价格随标的资产价格的变化，期权价格曲线斜率
+4.3  gamma：Γ
+Δ随标的资产价格的变化，期权价格曲线曲度</p>
+<p>4.4  theta：θ
+期权价格随时间的变化
+4.5  vega ： V
+期权价格随隐含波动率的变化
+5.量化概要</p>
+<p>last0）</p>
+<p>last1）</p>
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNjU0MjAxNTkyXX0=
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
