@@ -15,6 +15,7 @@ theme:
     # --- 删除 navigation.expand，让侧边栏默认保持折叠，更清爽 ---
     - navigation.indexes # 允许侧边栏分类本身也能被点击（如果有对应的 index.md）
     - navigation.top # 开启返回顶部按钮
+    - header.autohide
     - search.suggest # 搜索建议
     - search.highlight # 搜索词高亮
     - toc.follow # 右侧目录随滚动高亮
