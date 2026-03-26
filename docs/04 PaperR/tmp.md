@@ -79,8 +79,9 @@ OPHR 框架由两个核心智能体和一个两阶段训练流程组成。
     *   **输入：** 状态 $s_t^{hr} = (F_t, P_t, G_t)$。其中 $P_t$ 是当前持仓信息，$G_t$ 是实时计算的 Greeks。
     *   **动作：** 从一个“对冲策略池”中选择最适合当前环境的策略（如基于阈值的对冲、基于价格变化的对冲或深度强化学习对冲器）。
     *   **输出：** 具体的底层资产买卖数量，以抵消 Delta 风险。
+    * 每N步做出一次决策，选出的对冲策略每步执行对冲
   
-*   **Hedgers（套期保值者）：**
+*   **Hedgers（对冲策略池）：**
 	* 一组具有不同**风险厌恶水平**的对冲(套期保值)策略 $\{\pi^{hedger}_{i}\}^K_{i=1}$
 
 
@@ -133,6 +134,6 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYxMzM2NzcwOSwxNzc4MTI5NDYsLTg0Mj
-cwMTY1Ml19
+eyJoaXN0b3J5IjpbLTEyNzY0NTAyOTYsLTYxMzM2NzcwOSwxNz
+c4MTI5NDYsLTg0MjcwMTY1Ml19
 -->
