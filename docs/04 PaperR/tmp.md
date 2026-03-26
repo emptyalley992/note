@@ -81,7 +81,7 @@ OPHR 框架由两个核心智能体和一个两阶段训练流程组成。
     *   **输出：** 具体的底层资产买卖数量，以抵消 Delta 风险。
   
 *   **Hedgers（套期保值者）：**
-	* 一组具有不同**风险厌恶水平**的对冲(套期保值)策略 $\pi^{hedger}_{i}}$
+	* 一组具有不同**风险厌恶水平**的对冲(套期保值)策略 $\{\pi^{hedger}_{i}\}^K_{i=1}$
 
 
 
@@ -133,6 +133,6 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzNDc1NzA2NywxNzc4MTI5NDYsLTg0Mj
+eyJoaXN0b3J5IjpbLTYxMzM2NzcwOSwxNzc4MTI5NDYsLTg0Mj
 cwMTY1Ml19
 -->
