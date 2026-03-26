@@ -1131,10 +1131,11 @@ $<span class="arithmatex">\(PnL \approx \int_{0}^{T} \frac{S_t^2}{2} \Gamma (\si
 <li><strong>输入：</strong> 状态 <span class="arithmatex">\(s_t^{hr} = (F_t, P_t, G_t)\)</span>。其中 <span class="arithmatex">\(P_t\)</span> 是当前持仓信息，<span class="arithmatex">\(G_t\)</span> 是实时计算的 Greeks。</li>
 <li><strong>动作：</strong> 从一个“对冲策略池”中选择最适合当前环境的策略（如基于阈值的对冲、基于价格变化的对冲或深度强化学习对冲器）。</li>
 <li><strong>输出：</strong> 具体的底层资产买卖数量，以抵消 Delta 风险。</li>
+<li>每N步做出一次决策，选出的对冲策略每步执行对冲</li>
 </ul>
 </li>
 <li>
-<p><strong>Hedgers（套期保值者）：</strong></p>
+<p><strong>Hedgers（对冲策略池）：</strong></p>
 <ul>
 <li>一组具有不同<strong>风险厌恶水平</strong>的对冲(套期保值)策略 <span class="arithmatex">\(\{\pi^{hedger}_{i}\}^K_{i=1}\)</span></li>
 </ul>
@@ -1179,8 +1180,8 @@ $<span class="arithmatex">\(L(\theta) = \mathbb{E} \left[ \left( \sum_{k=0}^{n-1
 <p><strong>实验结论：</strong>
 OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期内，其 <strong>Total Return (TR)</strong> 在 BTC 上达到 33.10%，ETH 上达到 44.89%，而传统的 GARCH 和简单的 LSTM 模型在复杂的期权环境下大多表现为亏损。</p>
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYxMzM2NzcwOSwxNzc4MTI5NDYsLTg0Mj
-cwMTY1Ml19
+eyJoaXN0b3J5IjpbLTEyNzY0NTAyOTYsLTYxMzM2NzcwOSwxNz
+c4MTI5NDYsLTg0MjcwMTY1Ml19
 -->
 
 
