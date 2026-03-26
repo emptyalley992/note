@@ -16,7 +16,7 @@
 #### 波动率交易
 由于期权的复杂性，波动性交易策略有很多种。其中之一是多头/空头 Gamma 策略，旨在从 IV（市场定价的期权波动率）和 RV（标的资产实际价格波动）之间的差异中获利。
 
-该论文
+该论文用跨式期权组合，确保Δ为0，然后持有标的资产（对应的永续期货）进行对冲；
 
 
 
@@ -128,5 +128,5 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUxMzYwMzY0MiwtODQyNzAxNjUyXX0=
+eyJoaXN0b3J5IjpbMTc3ODEyOTQ2LC04NDI3MDE2NTJdfQ==
 -->
