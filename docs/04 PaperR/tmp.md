@@ -11,7 +11,17 @@
 
 ## Option
 
-### 1. OPHR: Mastering Volatility Trading with Multi-Agent Deep Reinforcement Learning
+### OPHR: Mastering Volatility Trading with Multi-Agent Deep Reinforcement Learning
+
+#### 波动率交易
+
+
+
+
+
+
+
+
 
 
 ### 任务一：论文总结、创新点与工作重心
@@ -117,5 +127,5 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg0MjcwMTY1Ml19
+eyJoaXN0b3J5IjpbODExMDQwNDkxLC04NDI3MDE2NTJdfQ==
 -->
