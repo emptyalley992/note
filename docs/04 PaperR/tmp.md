@@ -81,7 +81,10 @@ OPHR 框架由两个核心智能体和一个两阶段训练流程组成。
     *   **输出：** 具体的底层资产买卖数量，以抵消 Delta 风险。
   
 *   **Hedgers（套期保值者）：**
-	* 一组
+	* 一组对冲(套期保值)策略
+
+
+
 #### 2. 特征与数据流变化
 1.  **特征提取层：** 将小时级的标的价格、IV 数据输入。特征维度从原始序列转化为高维特征向量。
 2.  **决策层（OP）：** 输入特征向量 $\to$ 多层感知机（MLP） $\to$ 输出三个动作的概率（维度：3）。
@@ -130,6 +133,6 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjUzNzE3MTgxLDE3NzgxMjk0NiwtODQyNz
+eyJoaXN0b3J5IjpbNzYwMjk2NjEzLDE3NzgxMjk0NiwtODQyNz
 AxNjUyXX0=
 -->
