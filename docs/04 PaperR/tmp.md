@@ -11,8 +11,7 @@
 
 ## Option
 
-### 1. OPHR: Mastering Volatility Trading with Multi-Agent 
-
+### 1. OPHR: Mastering Volatility Trading with Multi-Agent Deep Reinforcement Learning
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkyMzE5ODk4M119
+eyJoaXN0b3J5IjpbNTQxMzgzNzZdfQ==
 -->
