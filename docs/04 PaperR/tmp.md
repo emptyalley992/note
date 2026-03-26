@@ -14,7 +14,7 @@
 ### OPHR: Mastering Volatility Trading with Multi-Agent Deep Reinforcement Learning
 
 #### 波动率交易
-
+由于期权的复杂性，波动性交易策略有很多种。其中之一是多头/空头 Gamma 策略，旨在从 IV（市场定价的期权波动率）和 RV（标的资产实际价格波动）之间的差异中获利。
 
 
 
@@ -127,5 +127,5 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODExMDQwNDkxLC04NDI3MDE2NTJdfQ==
+eyJoaXN0b3J5IjpbMTI2MzgzODUzNCwtODQyNzAxNjUyXX0=
 -->
