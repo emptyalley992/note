@@ -1083,6 +1083,7 @@
 <h2 id="option">Option<a class="headerlink" href="#option" title="Permanent link">&para;</a></h2>
 <h3 id="ophr-mastering-volatility-trading-with-multi-agent-deep-reinforcement-learning">OPHR: Mastering Volatility Trading with Multi-Agent Deep Reinforcement Learning<a class="headerlink" href="#ophr-mastering-volatility-trading-with-multi-agent-deep-reinforcement-learning" title="Permanent link">&para;</a></h3>
 <h4 id="_1">波动率交易<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
+<p>由于期权的复杂性，波动性交易策略有很多种。其中之一是多头/空头 Gamma 策略，旨在从 IV（市场定价的期权波动率）和 RV（标的资产实际价格波动）之间的差异中获利。</p>
 <h3 id="_2">任务一：论文总结、创新点与工作重心<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p><strong>总结：</strong>
 这篇论文研究的是金融领域中极其复杂的<strong>期权波动率交易（Volatility Trading）</strong>。波动率交易的核心逻辑在于利用“隐含波动率（IV，市场预测的）”与“实现波动率（RV，现实发生的）”之间的差异获利。论文提出了一个名为 <strong>OPHR</strong> 的强化学习框架，通过两个专门的智能体协作：一个负责“择时”（买卖什么），一个负责“对冲”（如何控制风险），从而在数字货币（BTC/ETH）市场实现了远超传统模型和单体机器学习算法的效果。</p>
@@ -1171,7 +1172,7 @@ $<span class="arithmatex">\(L(\theta) = \mathbb{E} \left[ \left( \sum_{k=0}^{n-1
 <p><strong>实验结论：</strong>
 OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期内，其 <strong>Total Return (TR)</strong> 在 BTC 上达到 33.10%，ETH 上达到 44.89%，而传统的 GARCH 和简单的 LSTM 模型在复杂的期权环境下大多表现为亏损。</p>
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODExMDQwNDkxLC04NDI3MDE2NTJdfQ==
+eyJoaXN0b3J5IjpbMTI2MzgzODUzNCwtODQyNzAxNjUyXX0=
 -->
 
 
