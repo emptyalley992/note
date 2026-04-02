@@ -1013,6 +1013,39 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#1-preprocess_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 修改 preprocess_data 函数 (移除标准化 &amp; 修复时间格式)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 修改 main 函数 (加入无未来泄露的标准化)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充提示（进阶量化经验）：
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1236,6 +1269,39 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#1-preprocess_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 修改 preprocess_data 函数 (移除标准化 &amp; 修复时间格式)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 修改 main 函数 (加入无未来泄露的标准化)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充提示（进阶量化经验）：
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1285,6 +1351,9 @@
 <li><a href="#_8">一、 深度思考：截面收益预测模型迭代路线</a></li>
 <li><a href="#python">二、 完整 Python 代码流程</a></li>
 <li><a href="#_9">关键细节说明：</a></li>
+<li><a href="#1-preprocess_data">1. 修改 preprocess_data 函数 (移除标准化 &amp; 修复时间格式)</a></li>
+<li><a href="#2-main">2. 修改 main 函数 (加入无未来泄露的标准化)</a></li>
+<li><a href="#_10">补充提示（进阶量化经验）：</a></li>
 </ul>
 </li>
 </ul>
@@ -1759,10 +1828,125 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 <li><strong>为何用 Z-score 作为标签</strong>：截面预测的本质是排序。用横截面 Z-score 作为Target，可以让模型的MSE Loss自动倾向于“拉大胜者和败者的预测差距”，与 IC（秩相关系数）指标天然契合。</li>
 <li><strong>样本不均衡（不足8只）的处理</strong>：因为在Dataset中，我是基于<code>ETFTimeSeriesDataset</code>进行逐只ETF的时间窗滚动提取的。预测时是对单只预测。验证时，我是用<code>df.groupby('date')</code>动态统计同一天存在的资产进行Rank IC计算。这种解法优雅地避开了因为截面维度对不齐导致的Tensor报错问题。</li>
 </ol>
+<p>非常棒的指正！这两个问题切中了量化模型工程落地时最常踩的坑：<strong>未来数据泄露(Look-ahead bias)</strong> 和 <strong>PyTorch DataLoader对时间类型的数据兼容性</strong>。</p>
+<p>针对您的反馈：
+1. <strong>未来数据泄露</strong>：是的，不能在全局预处理时做标准化。正确的做法是：<strong>先划分时间序列（Train/Val/Test），然后仅使用 Train 训练集的均值和方差对所有数据集进行标准化。</strong>
+2. <strong>TypeError 报错</strong>：PyTorch内置的 <code>default_collate</code> 函数无法打包 <code>numpy.datetime64</code> 或 Pandas 的 <code>Timestamp</code> 对象。解决方法是在放入 Dataset 前，<strong>将时间列强制转为字符串</strong>（如 <code>'2022-01-04'</code>），字符串在 DataLoader 中能被安全地打包成 tuple。</p>
+<p>以下是修复上述两个问题的<strong>更新版代码</strong>。我把修改点集中在了 <code>preprocess_data</code> 和 <code>main</code> 函数的逻辑中：</p>
+<h3 id="1-preprocess_data">1. 修改 <code>preprocess_data</code> 函数 (移除标准化 &amp; 修复时间格式)<a class="headerlink" href="#1-preprocess_data" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">preprocess_data</span><span class="p">(</span><span class="n">csv_path</span><span class="p">):</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="c1"># 读取数据</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="c1"># 【修复 2】：将日期时间转换为字符串格式，避免 PyTorch DataLoader 报错</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;trade_dt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;trade_dt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="c1"># 严格按时间和标的排序</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;instrument&#39;</span><span class="p">,</span> <span class="s1">&#39;trade_dt&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    <span class="n">feature_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;s_dq_pctchange&#39;</span><span class="p">,</span> <span class="s1">&#39;s_dq_volume&#39;</span><span class="p">,</span> <span class="s1">&#39;s_dq_amount&#39;</span><span class="p">,</span> 
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>                    <span class="s1">&#39;s_dq_adjopen&#39;</span><span class="p">,</span> <span class="s1">&#39;s_dq_adjhigh&#39;</span><span class="p">,</span> <span class="s1">&#39;s_dq_adjlow&#39;</span><span class="p">,</span> <span class="s1">&#39;s_dq_adjclose&#39;</span><span class="p">,</span> 
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>                    <span class="s1">&#39;trades_count&#39;</span><span class="p">,</span> <span class="s1">&#39;discount_rate&#39;</span><span class="p">]</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    <span class="c1"># 缺失值填充 (简单的向前填充)</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>    <span class="n">df</span><span class="p">[</span><span class="n">feature_cols</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;instrument&#39;</span><span class="p">)[</span><span class="n">feature_cols</span><span class="p">]</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>    <span class="c1"># ---------------- 标签构建 ----------------</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    <span class="c1"># 1. 真实的次日收益率：(明天复权收盘价 / 今天复权收盘价) - 1</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;next_return&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;instrument&#39;</span><span class="p">)[</span><span class="s1">&#39;s_dq_adjclose&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;s_dq_adjclose&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>    <span class="c1"># 2. 截面收益率标签化 (按日期做 Z-score)</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">calc_cs_return</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>            <span class="k">return</span> <span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;next_return&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;next_return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;next_return&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">+</span> <span class="mf">1e-8</span><span class="p">)</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;trade_dt&#39;</span><span class="p">,</span> <span class="n">group_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">calc_cs_return</span><span class="p">)</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>    <span class="c1"># 剔除因为shift产生的最后一天NaN</span>
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>
+<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>    <span class="c1"># 【修复 1】：去掉此处的全局特征标准化，移交至后续划分数据集后处理</span>
+<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>
+<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a>    <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">feature_cols</span>
+</code></pre></div>
+<h3 id="2-main">2. 修改 <code>main</code> 函数 (加入无未来泄露的标准化)<a class="headerlink" href="#2-main" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="c1"># 1. 准备数据</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">csv_path</span> <span class="o">=</span> <span class="s1">&#39;sample.csv&#39;</span> 
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="n">df</span><span class="p">,</span> <span class="n">feature_cols</span> <span class="o">=</span> <span class="n">preprocess_data</span><span class="p">(</span><span class="n">csv_path</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="c1"># 2. 时序划分数据集</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="n">dates_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;trade_dt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="n">n_dates</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dates_sorted</span><span class="p">)</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="n">train_end</span> <span class="o">=</span> <span class="n">dates_sorted</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">n_dates</span> <span class="o">*</span> <span class="mf">0.7</span><span class="p">)]</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="n">val_end</span> <span class="o">=</span> <span class="n">dates_sorted</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">n_dates</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)]</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="c1"># 为了避免 SettingWithCopyWarning，使用 .copy()</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>    <span class="n">train_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;trade_dt&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">train_end</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>    <span class="n">val_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;trade_dt&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">train_end</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;trade_dt&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">val_end</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>    <span class="n">test_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;trade_dt&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">val_end</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span><span class="si">}</span><span class="s2">, Val size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">val_df</span><span class="p">)</span><span class="si">}</span><span class="s2">, Test size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>    <span class="c1"># ---------------- 【修复 1 的核心实现】 ----------------</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>    <span class="c1"># 无未来数据泄露的标准化：仅利用 Train 数据集计算的统计量来标准化所有集合</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">feature_cols</span><span class="p">:</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>        <span class="n">train_mean</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>        <span class="n">train_std</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">+</span> <span class="mf">1e-8</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>        <span class="n">train_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">train_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">train_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">train_std</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>        <span class="n">val_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">val_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">train_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">train_std</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a>        <span class="n">test_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">test_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">train_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">train_std</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a>    <span class="c1"># --------------------------------------------------------</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a>
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a>    <span class="c1"># 3. 建立 Dataset &amp; DataLoader</span>
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a>    <span class="n">seq_len</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># 滑动窗口天数</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a>    <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">ETFTimeSeriesDataset</span><span class="p">(</span><span class="n">train_df</span><span class="p">,</span> <span class="n">feature_cols</span><span class="p">,</span> <span class="n">seq_len</span><span class="o">=</span><span class="n">seq_len</span><span class="p">)</span>
+<a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a>    <span class="n">val_dataset</span> <span class="o">=</span> <span class="n">ETFTimeSeriesDataset</span><span class="p">(</span><span class="n">val_df</span><span class="p">,</span> <span class="n">feature_cols</span><span class="p">,</span> <span class="n">seq_len</span><span class="o">=</span><span class="n">seq_len</span><span class="p">)</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a>    <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">ETFTimeSeriesDataset</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">feature_cols</span><span class="p">,</span> <span class="n">seq_len</span><span class="o">=</span><span class="n">seq_len</span><span class="p">)</span>
+<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a>
+<a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a>    <span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a>    <span class="n">val_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">val_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a>    <span class="n">test_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a>
+<a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a>    <span class="c1"># 4. 初始化模型 (解耦处，后续只需改此处即可)</span>
+<a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a>    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+<a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a>    <span class="n">input_dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">feature_cols</span><span class="p">)</span>
+<a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a>
+<a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">GRUPredictor</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-7-46" name="__codelineno-7-46" href="#__codelineno-7-46"></a>
+<a id="__codelineno-7-47" name="__codelineno-7-47" href="#__codelineno-7-47"></a>    <span class="c1"># 5. 训练模型</span>
+<a id="__codelineno-7-48" name="__codelineno-7-48" href="#__codelineno-7-48"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting training...&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-49" name="__codelineno-7-49" href="#__codelineno-7-49"></a>    <span class="n">trained_model</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a>
+<a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a>    <span class="c1"># 6. 在测试集上最终评估</span>
+<a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a>    <span class="n">trained_model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<a id="__codelineno-7-53" name="__codelineno-7-53" href="#__codelineno-7-53"></a>    <span class="n">test_preds</span><span class="p">,</span> <span class="n">test_targets</span><span class="p">,</span> <span class="n">test_dates</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+<a id="__codelineno-7-54" name="__codelineno-7-54" href="#__codelineno-7-54"></a>    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+<a id="__codelineno-7-55" name="__codelineno-7-55" href="#__codelineno-7-55"></a>        <span class="k">for</span> <span class="n">X_batch</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">,</span> <span class="n">dates</span> <span class="ow">in</span> <span class="n">test_loader</span><span class="p">:</span>
+<a id="__codelineno-7-56" name="__codelineno-7-56" href="#__codelineno-7-56"></a>            <span class="n">preds</span> <span class="o">=</span> <span class="n">trained_model</span><span class="p">(</span><span class="n">X_batch</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+<a id="__codelineno-7-57" name="__codelineno-7-57" href="#__codelineno-7-57"></a>            <span class="n">test_preds</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">preds</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<a id="__codelineno-7-58" name="__codelineno-7-58" href="#__codelineno-7-58"></a>            <span class="n">test_targets</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">y_batch</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<a id="__codelineno-7-59" name="__codelineno-7-59" href="#__codelineno-7-59"></a>            <span class="n">test_dates</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span> <span class="c1"># dates 现在是 string tuple，可以正常 extend</span>
+<a id="__codelineno-7-60" name="__codelineno-7-60" href="#__codelineno-7-60"></a>
+<a id="__codelineno-7-61" name="__codelineno-7-61" href="#__codelineno-7-61"></a>    <span class="n">test_ic</span> <span class="o">=</span> <span class="n">calculate_ic</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test_preds</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test_targets</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test_dates</span><span class="p">))</span>
+<a id="__codelineno-7-62" name="__codelineno-7-62" href="#__codelineno-7-62"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Final Test IC: </span><span class="si">{</span><span class="n">test_ic</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-63" name="__codelineno-7-63" href="#__codelineno-7-63"></a>
+<a id="__codelineno-7-64" name="__codelineno-7-64" href="#__codelineno-7-64"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<a id="__codelineno-7-65" name="__codelineno-7-65" href="#__codelineno-7-65"></a>    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="_10">补充提示（进阶量化经验）：<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>目前的无泄露标准化是“静态划分式”，在实盘中（跨度好几年的数据），分布可能会发生漂移 (Distribution Shift)。
+在进一步迭代时，可以把标准化动作放入 Dataset 构建之前，采用<strong>时序滚动Z-score</strong>（Rolling Z-score）。
+例如：<code>df['vol_norm'] = (df['vol'] - df['vol'].rolling(60).mean()) / df['vol'].rolling(60).std()</code>
+这种计算也是天然无未来函数的，能够适应长周期的市场状态变化。但作为当前的模型框架打样，我们采用的 Train stats 是完全标准和正确的做法。您现在可以无报错地跑通整套基线流程了！</p>
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NzIzMDAwMjEsLTg1MjEyMjM4LC0xMj
-c2NDUwMjk2LC02MTMzNjc3MDksMTc3ODEyOTQ2LC04NDI3MDE2
-NTJdfQ==
+eyJoaXN0b3J5IjpbMjAyMzg2OTkyOCwtMTQ3MjMwMDAyMSwtOD
+UyMTIyMzgsLTEyNzY0NTAyOTYsLTYxMzM2NzcwOSwxNzc4MTI5
+NDYsLTg0MjcwMTY1Ml19
 -->
 
 
