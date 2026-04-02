@@ -525,8 +525,134 @@ if __name__ == '__main__':
 2. **为何用 Z-score 作为标签**：截面预测的本质是排序。用横截面 Z-score 作为Target，可以让模型的MSE Loss自动倾向于“拉大胜者和败者的预测差距”，与 IC（秩相关系数）指标天然契合。
 3. **样本不均衡（不足8只）的处理**：因为在Dataset中，我是基于`ETFTimeSeriesDataset`进行逐只ETF的时间窗滚动提取的。预测时是对单只预测。验证时，我是用`df.groupby('date')`动态统计同一天存在的资产进行Rank IC计算。这种解法优雅地避开了因为截面维度对不齐导致的Tensor报错问题。
 
+
+
+非常棒的指正！这两个问题切中了量化模型工程落地时最常踩的坑：**未来数据泄露(Look-ahead bias)** 和 **PyTorch DataLoader对时间类型的数据兼容性**。
+
+针对您的反馈：
+1. **未来数据泄露**：是的，不能在全局预处理时做标准化。正确的做法是：**先划分时间序列（Train/Val/Test），然后仅使用 Train 训练集的均值和方差对所有数据集进行标准化。**
+2. **TypeError 报错**：PyTorch内置的 `default_collate` 函数无法打包 `numpy.datetime64` 或 Pandas 的 `Timestamp` 对象。解决方法是在放入 Dataset 前，**将时间列强制转为字符串**（如 `'2022-01-04'`），字符串在 DataLoader 中能被安全地打包成 tuple。
+
+以下是修复上述两个问题的**更新版代码**。我把修改点集中在了 `preprocess_data` 和 `main` 函数的逻辑中：
+
+### 1. 修改 `preprocess_data` 函数 (移除标准化 & 修复时间格式)
+
+```python
+def preprocess_data(csv_path):
+    # 读取数据
+    df = pd.read_csv(csv_path)
+    
+    # 【修复 2】：将日期时间转换为字符串格式，避免 PyTorch DataLoader 报错
+    df['trade_dt'] = pd.to_datetime(df['trade_dt'].astype(str)).dt.strftime('%Y-%m-%d')
+    
+    # 严格按时间和标的排序
+    df = df.sort_values(by=['instrument', 'trade_dt']).reset_index(drop=True)
+    
+    feature_cols = ['s_dq_pctchange', 's_dq_volume', 's_dq_amount', 
+                    's_dq_adjopen', 's_dq_adjhigh', 's_dq_adjlow', 's_dq_adjclose', 
+                    'trades_count', 'discount_rate']
+    
+    # 缺失值填充 (简单的向前填充)
+    df[feature_cols] = df.groupby('instrument')[feature_cols].ffill().fillna(0)
+    
+    # ---------------- 标签构建 ----------------
+    # 1. 真实的次日收益率：(明天复权收盘价 / 今天复权收盘价) - 1
+    df['next_return'] = df.groupby('instrument')['s_dq_adjclose'].shift(-1) / df['s_dq_adjclose'] - 1
+    
+    # 2. 截面收益率标签化 (按日期做 Z-score)
+    def calc_cs_return(group):
+        if len(group) > 1:
+            return (group['next_return'] - group['next_return'].mean()) / (group['next_return'].std() + 1e-8)
+        else:
+            return pd.Series(0.0, index=group.index)
+            
+    df['target'] = df.groupby('trade_dt', group_keys=False).apply(calc_cs_return)
+    
+    # 剔除因为shift产生的最后一天NaN
+    df = df.dropna(subset=['target'])
+    
+    # 【修复 1】：去掉此处的全局特征标准化，移交至后续划分数据集后处理
+    
+    return df, feature_cols
+```
+
+### 2. 修改 `main` 函数 (加入无未来泄露的标准化)
+
+```python
+def main():
+    # 1. 准备数据
+    csv_path = 'sample.csv' 
+    df, feature_cols = preprocess_data(csv_path)
+    
+    # 2. 时序划分数据集
+    dates_sorted = np.sort(df['trade_dt'].unique())
+    n_dates = len(dates_sorted)
+    
+    train_end = dates_sorted[int(n_dates * 0.7)]
+    val_end = dates_sorted[int(n_dates * 0.8)]
+    
+    # 为了避免 SettingWithCopyWarning，使用 .copy()
+    train_df = df[df['trade_dt'] < train_end].copy()
+    val_df = df[(df['trade_dt'] >= train_end) & (df['trade_dt'] < val_end)].copy()
+    test_df = df[df['trade_dt'] >= val_end].copy()
+    
+    print(f"Train size: {len(train_df)}, Val size: {len(val_df)}, Test size: {len(test_df)}")
+    
+    # ---------------- 【修复 1 的核心实现】 ----------------
+    # 无未来数据泄露的标准化：仅利用 Train 数据集计算的统计量来标准化所有集合
+    for col in feature_cols:
+        train_mean = train_df[col].mean()
+        train_std = train_df[col].std() + 1e-8
+        
+        train_df[col] = (train_df[col] - train_mean) / train_std
+        val_df[col] = (val_df[col] - train_mean) / train_std
+        test_df[col] = (test_df[col] - train_mean) / train_std
+    # --------------------------------------------------------
+
+    # 3. 建立 Dataset & DataLoader
+    seq_len = 10 # 滑动窗口天数
+    train_dataset = ETFTimeSeriesDataset(train_df, feature_cols, seq_len=seq_len)
+    val_dataset = ETFTimeSeriesDataset(val_df, feature_cols, seq_len=seq_len)
+    test_dataset = ETFTimeSeriesDataset(test_df, feature_cols, seq_len=seq_len)
+    
+    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False)
+    test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
+    
+    # 4. 初始化模型 (解耦处，后续只需改此处即可)
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    input_dim = len(feature_cols)
+    
+    model = GRUPredictor(input_dim=input_dim, hidden_dim=64, num_layers=2)
+    
+    # 5. 训练模型
+    print("Starting training...")
+    trained_model = train_model(model, train_loader, val_loader, epochs=50, lr=1e-3, patience=5, device=device)
+    
+    # 6. 在测试集上最终评估
+    trained_model.eval()
+    test_preds, test_targets, test_dates = [], [], []
+    with torch.no_grad():
+        for X_batch, y_batch, dates in test_loader:
+            preds = trained_model(X_batch.to(device))
+            test_preds.extend(preds.cpu().numpy())
+            test_targets.extend(y_batch.numpy())
+            test_dates.extend(dates) # dates 现在是 string tuple，可以正常 extend
+            
+    test_ic = calculate_ic(np.array(test_preds), np.array(test_targets), np.array(test_dates))
+    print(f"\nFinal Test IC: {test_ic:.4f}")
+
+if __name__ == '__main__':
+    main()
+```
+
+### 补充提示（进阶量化经验）：
+目前的无泄露标准化是“静态划分式”，在实盘中（跨度好几年的数据），分布可能会发生漂移 (Distribution Shift)。
+在进一步迭代时，可以把标准化动作放入 Dataset 构建之前，采用**时序滚动Z-score**（Rolling Z-score）。
+例如：`df['vol_norm'] = (df['vol'] - df['vol'].rolling(60).mean()) / df['vol'].rolling(60).std()`
+这种计算也是天然无未来函数的，能够适应长周期的市场状态变化。但作为当前的模型框架打样，我们采用的 Train stats 是完全标准和正确的做法。您现在可以无报错地跑通整套基线流程了！
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NzIzMDAwMjEsLTg1MjEyMjM4LC0xMj
-c2NDUwMjk2LC02MTMzNjc3MDksMTc3ODEyOTQ2LC04NDI3MDE2
-NTJdfQ==
+eyJoaXN0b3J5IjpbMjAyMzg2OTkyOCwtMTQ3MjMwMDAyMSwtOD
+UyMTIyMzgsLTEyNzY0NTAyOTYsLTYxMzM2NzcwOSwxNzc4MTI5
+NDYsLTg0MjcwMTY1Ml19
 -->
