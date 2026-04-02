@@ -227,7 +227,306 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 
 
 
+# tmp
+
+这是一个非常典型的量化金融机器学习任务（量价因子挖掘与截面收益预测）。针对您的需求，我将整个方案分为三个部分：**模型迭代架构深度思考**、**核心代码框架**（包含数据处理、解耦的模型定义、带IC和早停的训练流程）。
+
+### 一、 深度思考：截面收益预测模型迭代路线
+
+在量化中，预测截面收益率不仅要看单资产的时间序列规律，还要看同一时刻多资产之间的横向关系。针对此任务（最多8只债券ETF的日频数据），我为您构想了以下**由简到繁的四代迭代路线**：
+
+1.  **V1 - 纯时序特征提取（当前基线）：GRU / LSTM**
+    *   **思路**：将每只ETF视为独立的时间序列，使用历史 $N$ 天的特征预测未来的收益。
+    *   **优点**：实现简单，能捕捉单只资产的动量、反转等时序规律。
+    *   **缺点**：忽略了同一天不同ETF之间的联动关系和市场整体的宏观状态。
+2.  **V2 - 时序特征 + 注意力机制：GRU + Temporal Attention / ALSTM**
+    *   **思路**：在GRU的基础上，增加对历史不同时间步的Attention权重（有些历史日期的信息更关键）。
+    *   **改进**：模型不仅知道历史趋势，还能“聚焦”重要事件日。
+3.  **V3 - 时空联合建模（加入截面交互）：GRU + Cross-sectional Transformer / Self-Attention**
+    *   **思路**：第一步用GRU分别提取当天 $N$ 只ETF的时序向量；第二步，将这 $N$ 个向量输入到一个Transformer Encoder中进行横向（截面）信息交互。
+    *   **改进**：由于数据中有时ETF不足8只，Transformer的Attention机制天生能处理变长序列，能完美解决同一天资产数量不固定的问题，实现真正的“截面预测”。
+4.  **V4 - 引入图谱交互：时序图神经网络 (T-GNN / GAT)**
+    *   **思路**：基于ETF的底层资产相似度、久期或交易量相关性构建动态图，使用Graph Attention Network (GAT) 聚合信息。
+    *   **改进**：最高阶解法，显式地利用金融逻辑来约束深度学习模型的截面信息流动。
+
+---
+
+### 二、 完整 Python 代码流程
+
+为了方便迭代，代码高度解耦。只需修改 `model = XXX` 即可无缝切换模型。
+
+#### 1. 导入依赖与设置
+```python
+import pandas as pd
+import numpy as np
+import torch
+import torch.nn as nn
+from torch.utils.data import Dataset, DataLoader
+from scipy.stats import spearmanr
+import warnings
+warnings.filterwarnings('ignore')
+
+# 设置随机种子保证复现
+torch.manual_seed(42)
+np.random.seed(42)
+```
+
+#### 2. 数据预处理与特征工程
+```python
+def preprocess_data(csv_path):
+    # 读取数据
+    df = pd.read_csv(csv_path)
+    
+    # 时间格式处理与排序 (量化任务必须严格按时间排序)
+    df['trade_dt'] = pd.to_datetime(df['trade_dt'].astype(str))
+    df = df.sort_values(by=['instrument', 'trade_dt']).reset_index(drop=True)
+    
+    # 选取所需特征列 (这里选取一部分作为示范)
+    feature_cols = ['s_dq_pctchange', 's_dq_volume', 's_dq_amount', 
+                    's_dq_adjopen', 's_dq_adjhigh', 's_dq_adjlow', 's_dq_adjclose', 
+                    'trades_count', 'discount_rate']
+    
+    # 缺失值填充 (简单的向前填充)
+    df[feature_cols] = df.groupby('instrument')[feature_cols].ffill().fillna(0)
+    
+    # ---------------- 标签构建 (重点) ----------------
+    # 1. 计算真实的次日收益率：(明天复权收盘价 / 今天复权收盘价) - 1
+    df['next_return'] = df.groupby('instrument')['s_dq_adjclose'].shift(-1) / df['s_dq_adjclose'] - 1
+    
+    # 2. 截面收益率标签化 (按日期做 Z-score)
+    # 因为存在不足8只的情况，当某天只有1只时无法做截面处理，直接赋予0或剔除
+    def calc_cs_return(group):
+        if len(group) > 1:
+            return (group['next_return'] - group['next_return'].mean()) / (group['next_return'].std() + 1e-8)
+        else:
+            return pd.Series(0.0, index=group.index)
+            
+    df['target'] = df.groupby('trade_dt').apply(calc_cs_return).reset_index(level=0, drop=True)
+    
+    # 剔除因为shift产生的最后一天NaN
+    df = df.dropna(subset=['target'])
+    
+    # 特征标准化 (时序标准化，避免使用未来数据，此处简单使用整体标准化，实盘需用滚动标准化)
+    for col in feature_cols:
+        df[col] = (df[col] - df[col].mean()) / (df[col].std() + 1e-8)
+        
+    return df, feature_cols
+
+```
+
+#### 3. 构建 PyTorch Dataset (滑动窗口)
+```python
+class ETFTimeSeriesDataset(Dataset):
+    def __init__(self, df, feature_cols, seq_len=10):
+        self.seq_len = seq_len
+        self.X = []
+        self.y = []
+        self.dates = []  # 用于后续计算IC
+        
+        # 按股票分组构建滑动窗口
+        for inst, group in df.groupby('instrument'):
+            group = group.sort_values('trade_dt').reset_index(drop=True)
+            values = group[feature_cols].values
+            targets = group['target'].values
+            dates = group['trade_dt'].values
+            
+            for i in range(len(group) - seq_len):
+                self.X.append(values[i : i + seq_len])
+                self.y.append(targets[i + seq_len - 1]) # 使用窗口最后一天预测明天
+                self.dates.append(dates[i + seq_len - 1])
+                
+        self.X = torch.tensor(np.array(self.X), dtype=torch.float32)
+        self.y = torch.tensor(np.array(self.y), dtype=torch.float32).unsqueeze(-1)
+        
+    def __len__(self):
+        return len(self.X)
+    
+    def __getitem__(self, idx):
+        return self.X[idx], self.y[idx], self.dates[idx]
+```
+
+#### 4. 模型定义 (高度解耦)
+```python
+# 基线模型：GRU
+class GRUPredictor(nn.Module):
+    def __init__(self, input_dim, hidden_dim=64, num_layers=2, dropout=0.2):
+        super(GRUPredictor, self).__init__()
+        self.gru = nn.GRU(input_size=input_dim, 
+                          hidden_size=hidden_dim, 
+                          num_layers=num_layers, 
+                          batch_first=True, 
+                          dropout=dropout)
+        
+        # 全连接层映射到单一收益率预测值
+        self.fc = nn.Sequential(
+            nn.Linear(hidden_dim, 32),
+            nn.ReLU(),
+            nn.Linear(32, 1)
+        )
+        
+    def forward(self, x):
+        # x shape: (batch, seq_len, input_dim)
+        out, _ = self.gru(x)
+        # 取时间序列的最后一步作为表征
+        last_out = out[:, -1, :] 
+        # 预测截面收益率
+        pred = self.fc(last_out)
+        return pred
+
+# 如果未来要尝试其他模型，直接在这里定义，例如：
+# class TransformerPredictor(nn.Module): ...
+# class ALSTMPredictor(nn.Module): ...
+```
+
+#### 5. 训练与验证逻辑 (带 Rank IC 和 早停)
+```python
+def calculate_ic(preds, targets, dates):
+    """计算按日期分组的截面 Rank IC"""
+    df_eval = pd.DataFrame({'date': dates, 'pred': preds.flatten(), 'target': targets.flatten()})
+    ic_list = []
+    
+    for date, group in df_eval.groupby('date'):
+        if len(group) > 1: # 至少有两个资产才能计算Rank IC
+            ic, _ = spearmanr(group['pred'], group['target'])
+            if not np.isnan(ic):
+                ic_list.append(ic)
+                
+    return np.mean(ic_list) if ic_list else 0.0
+
+def train_model(model, train_loader, val_loader, epochs=50, lr=1e-3, patience=5, device='cpu'):
+    criterion = nn.MSELoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    
+    best_val_ic = -np.inf
+    patience_counter = 0
+    best_model_state = None
+    
+    model.to(device)
+    
+    for epoch in range(epochs):
+        # ---------------- Training ----------------
+        model.train()
+        train_loss = 0.0
+        for X_batch, y_batch, _ in train_loader:
+            X_batch, y_batch = X_batch.to(device), y_batch.to(device)
+            
+            optimizer.zero_grad()
+            preds = model(X_batch)
+            loss = criterion(preds, y_batch)
+            loss.backward()
+            optimizer.step()
+            
+            train_loss += loss.item()
+            
+        train_loss /= len(train_loader)
+        
+        # ---------------- Validation ----------------
+        model.eval()
+        val_preds, val_targets, val_dates = [], [], []
+        val_loss = 0.0
+        
+        with torch.no_grad():
+            for X_batch, y_batch, dates in val_loader:
+                X_batch, y_batch = X_batch.to(device), y_batch.to(device)
+                preds = model(X_batch)
+                
+                loss = criterion(preds, y_batch)
+                val_loss += loss.item()
+                
+                val_preds.extend(preds.cpu().numpy())
+                val_targets.extend(y_batch.cpu().numpy())
+                val_dates.extend(dates) # dates 是 tuple
+                
+        val_loss /= len(val_loader)
+        val_ic = calculate_ic(np.array(val_preds), np.array(val_targets), np.array(val_dates))
+        
+        print(f"Epoch {epoch+1}/{epochs} - Train MSE: {train_loss:.4f} - Val MSE: {val_loss:.4f} - Val IC: {val_ic:.4f}")
+        
+        # ---------------- Early Stopping (根据 IC 监控) ----------------
+        if val_ic > best_val_ic:
+            best_val_ic = val_ic
+            patience_counter = 0
+            best_model_state = model.state_dict()
+        else:
+            patience_counter += 1
+            
+        if patience_counter >= patience:
+            print(f"Early stopping triggered at epoch {epoch+1}!")
+            break
+            
+    # 加载最优模型
+    if best_model_state:
+        model.load_state_dict(best_model_state)
+    return model
+```
+
+#### 6. 主流程组合 (划分数据集与执行)
+```python
+def main():
+    # 1. 准备数据
+    csv_path = 'sample.csv' # 替换为您的实际路径
+    df, feature_cols = preprocess_data(csv_path)
+    
+    # 2. 时序划分数据集
+    # 根据题意数据到2026年，这里假设按时间切割：训练(前70%) / 验证(10%) / 测试(20%)
+    dates_sorted = np.sort(df['trade_dt'].unique())
+    n_dates = len(dates_sorted)
+    
+    train_end = dates_sorted[int(n_dates * 0.7)]
+    val_end = dates_sorted[int(n_dates * 0.8)]
+    
+    train_df = df[df['trade_dt'] < train_end]
+    val_df = df[(df['trade_dt'] >= train_end) & (df['trade_dt'] < val_end)]
+    test_df = df[df['trade_dt'] >= val_end]
+    
+    print(f"Train size: {len(train_df)}, Val size: {len(val_df)}, Test size: {len(test_df)}")
+    
+    # 3. 建立 Dataset & DataLoader
+    seq_len = 10 # 滑动窗口天数
+    train_dataset = ETFTimeSeriesDataset(train_df, feature_cols, seq_len=seq_len)
+    val_dataset = ETFTimeSeriesDataset(val_df, feature_cols, seq_len=seq_len)
+    test_dataset = ETFTimeSeriesDataset(test_df, feature_cols, seq_len=seq_len)
+    
+    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False)
+    test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
+    
+    # 4. 初始化模型 (解耦处，后续只需改此处即可)
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    input_dim = len(feature_cols)
+    
+    model = GRUPredictor(input_dim=input_dim, hidden_dim=64, num_layers=2)
+    # model = TransformerPredictor(...) # 未来替换点
+    
+    # 5. 训练模型
+    print("Starting training...")
+    trained_model = train_model(model, train_loader, val_loader, epochs=50, lr=1e-3, patience=5, device=device)
+    
+    # 6. 在测试集上最终评估
+    trained_model.eval()
+    test_preds, test_targets, test_dates = [], [], []
+    with torch.no_grad():
+        for X_batch, y_batch, dates in test_loader:
+            preds = trained_model(X_batch.to(device))
+            test_preds.extend(preds.cpu().numpy())
+            test_targets.extend(y_batch.numpy())
+            test_dates.extend(dates)
+            
+    test_ic = calculate_ic(np.array(test_preds), np.array(test_targets), np.array(test_dates))
+    print(f"\nFinal Test IC: {test_ic:.4f}")
+
+if __name__ == '__main__':
+    # 运行前请确保环境中已安装必要库，并且 sample.csv 与代码同级
+    main()
+```
+
+### 关键细节说明：
+1. **数据泄露防范**：数据集划分必须是**基于时间严格切割**（`train_end`, `val_end`），在时序和量价任务中绝不能用随机打乱法（`train_test_split`），否则未来数据泄露会导致模型在测试集虚高，实盘崩溃。
+2. **为何用 Z-score 作为标签**：截面预测的本质是排序。用横截面 Z-score 作为Target，可以让模型的MSE Loss自动倾向于“拉大胜者和败者的预测差距”，与 IC（秩相关系数）指标天然契合。
+3. **样本不均衡（不足8只）的处理**：因为在Dataset中，我是基于`ETFTimeSeriesDataset`进行逐只ETF的时间窗滚动提取的。预测时是对单只预测。验证时，我是用`df.groupby('date')`动态统计同一天存在的资产进行Rank IC计算。这种解法优雅地避开了因为截面维度对不齐导致的Tensor报错问题。
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1MjEyMjM4LC0xMjc2NDUwMjk2LC02MT
-MzNjc3MDksMTc3ODEyOTQ2LC04NDI3MDE2NTJdfQ==
+eyJoaXN0b3J5IjpbLTE0NzIzMDAwMjEsLTg1MjEyMjM4LC0xMj
+c2NDUwMjk2LC02MTMzNjc3MDksMTc3ODEyOTQ2LC04NDI3MDE2
+NTJdfQ==
 -->
