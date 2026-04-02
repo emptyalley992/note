@@ -234,15 +234,16 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 我可以为你提供的信息是多元散射校正 (MSC）是一个相对好一点的预处理方法
 需要你深度思考，给出思考改进方法的思维过程。
 
-# python代码要求：
+# 输出python代码要求：
 在一个python文件中，包括文件读取，数据预处理，数据集划分，模型训练，模型测试，测试结果的保存，测试结果的性能（准确率等）的输出
 深度学习代码要使用pytorch编写
 
-# 已实现的
+# 已实现的版本
+
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA4NjE3MjM4OSwtMTU4MDg1MDExNywyMD
+eyJoaXN0b3J5IjpbMTE3MzM3NTkyNiwtMTU4MDg1MDExNywyMD
 IzODY5OTI4LC0xNDcyMzAwMDIxLC04NTIxMjIzOCwtMTI3NjQ1
 MDI5NiwtNjEzMzY3NzA5LDE3NzgxMjk0NiwtODQyNzAxNjUyXX
 0=
