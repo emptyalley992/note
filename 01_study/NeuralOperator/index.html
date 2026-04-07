@@ -538,67 +538,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#gno-for-ivs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GNO for IVS
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="GNO for IVS">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        任务一：论文总结、创新点与工作重心
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        任务二：技术背景与原理
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        任务三：提出的方法及原理（核心重点）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        任务四：实验部分简要介绍
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1204,67 +1143,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#gno-for-ivs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GNO for IVS
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="GNO for IVS">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        任务一：论文总结、创新点与工作重心
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        任务二：技术背景与原理
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        任务三：提出的方法及原理（核心重点）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        任务四：实验部分简要介绍
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1284,6 +1162,8 @@
   
   
 
+
+  <h1>NeuralOperator</h1>
 
 <blockquote>
 <p>Written with <a href="https://stackedit.cn/">StackEdit中文版</a>.</p>
@@ -1306,38 +1186,21 @@
 <li><a href="#_4">任务四：实验部分简述</a></li>
 </ul>
 </li>
-<li><a href="#gno-for-ivs">GNO for IVS</a><ul>
-<li><a href="#_5">任务一：论文总结、创新点与工作重心</a></li>
-<li><a href="#_6">任务二：技术背景与原理</a></li>
-<li><a href="#_7">任务三：提出的方法及原理（核心重点）</a></li>
-<li><a href="#_8">任务四：实验部分简要介绍</a></li>
-</ul>
-</li>
 </ul>
 </div>
 <p>梳理神经算子（Neural Operators, NO）领域的发展，可以将其视为从“经典算子逼近”到“通用物理基础模型”的演进。以下是基于谷歌学术（Google Scholar）及 2024-2026 年最新顶会（NeurIPS, ICLR, CVPR）研究现状整理的综述大纲：</p>
-<pre class="mermaid"><code>mindmap
-  root((项目管理))
-    graph
-    规划阶段
-      需求分析
-      资源评估
-      时间规划
-    执行阶段
-      开发任务
-        前端开发
-        后端开发
-      测试任务
-        单元测试
-        集成测试
-    收尾阶段
-      部署上线
-      项目总结</code></pre>
-<pre class="mermaid"><code>flowchart LR
-    A[输入] --&gt; B[处理]
-    B --&gt; C[输出]</code></pre>
-<hr />
 <h2 id="2019-2026">一、神经算子领域发展综述（2019 - 2026）我要看看你你能弄多长到底多长啊<a class="headerlink" href="#2019-2026" title="Permanent link">&para;</a></h2>
+<p>DeepOnet(2019，4245
+FNO(2020，5182
+Galerkin Transformer (2021)
+Geo-FNO (Geometric Fourier Neural Operator, 2022，662)
+GNOT (Graph Neural Operator Transformer, 2023)
+Transolver, MNO
+GINO
+PINO,2021；Exact Derivative PINO
+Derivative-Enhanced NO ：Derivative-enhanced Deep Operator Network
+GNOT
+SFNO</p>
 <h3 id="1-2019-2021">1. 奠基阶段：架构的多样化探索 (2019 - 2021)<a class="headerlink" href="#1-2019-2021" title="Permanent link">&para;</a></h3>
 <p>这一阶段解决了如何定义“算子学习”这一核心问题，即学习函数空间到函数空间的映射 <span class="arithmatex">\(\mathcal{G}: \mathcal{A} \to \mathcal{U}\)</span>。</p>
 <ul>
@@ -1499,97 +1362,8 @@ $<span class="arithmatex">\(u(x) = \int_D G_a(x, y) f(y) dy\)</span>$
 *   <strong>超强泛化（跨分辨率）</strong>：把 GKN 在 16×16 这样极其粗糙的低分辨率网格上训练，然后直接拿到 241×241 的高分辨率网格上测试，误差依然稳定（在 5% 左右），而 FCN 这种基于 CNN 的模型在改变分辨率后直接失效。
 *   <strong>半监督能力</strong>：只需在训练时给一小部分散点数据（例如从原图中随机抽200个点），模型就能学会背后的积分核，进而在整张图上预测。</p>
 <p><strong>总结而言</strong>，作为一名金融AI工作者，我必须指出：这篇论文提出了一种跳出“像素到像素”的降维打击思维。它通过把高深的泛函分析（积分算子）与图神经网络（消息传递）结合，使得深度学习彻底摆脱了固定网格的限制。这种思想不仅仅在流体力学中有用，未来在解高维偏微分方程的金融期权定价（如通过随机偏微分方程解算）领域，同样具有巨大的降维加速潜力。</p>
-<h1 id="gno-for-ivs">GNO for IVS<a class="headerlink" href="#gno-for-ivs" title="Permanent link">&para;</a></h1>
-<p>你好！作为一名在金融AI领域的专家，我非常高兴为你解读这篇极具前瞻性的论文《OPERATOR DEEP SMOOTHING FOR IMPLIED VOLATILITY》（期权隐含波动率的算子深度平滑）。</p>
-<p>这篇论文巧妙地将前沿的<strong>神经算子（Neural Operators）</strong>引入了金融工程中最经典且最具挑战性的问题之一：<strong>期权隐含波动率曲面平滑</strong>。以下是为你量身定制的详细拆解：</p>
-<hr />
-<h3 id="_5">任务一：论文总结、创新点与工作重心<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p><strong>论文总结：</strong>
-本文提出了一种名为“算子深度平滑”（Operator Deep Smoothing, OpDS）的新方法，用于处理期权市场中的隐含波动率平滑问题。与传统每次市场更新都需要重新求解最优化问题的参数化方法（如SVI模型）不同，该方法通过离线训练一个<strong>图神经算子（Graph Neural Operator, GNO）</strong>，在在线推理时只需一次前向传播，即可直接将动态、不规则的离散市场报价映射为平滑且无套利的隐含波动率曲面。</p>
-<p><strong>核心创新点（去废话版）：</strong>
-1. <strong>金融领域的首次神经算子应用</strong>：首次将神经算子技术应用于金融工程中的插值/外推问题（即波动率平滑）。
-2. <strong>离散不变性（Discretization-Invariant）</strong>：突破了传统神经网络需要固定维度输入的限制。由于期权市场每天挂牌的行权价和到期日数量和位置都在动态变化，GNO能够完美适应任意大小和空间排列的输入数据。
-3. <strong>改进的插值GNO架构</strong>：针对传统GNO不支持对未观测点直接输出的问题，修改了第一层网络结构（去除了局部线性变换，仅保留非局部积分），使其能够作为纯插值/外推工具。
-4. <strong>融合硬核金融约束</strong>：在损失函数中深度融合了无静态套利（Static Arbitrage-Free）的数学硬约束（日历套利与蝶式套利条件）。</p>
-<p><strong>工作重心：</strong>
-开发一种高精度、高效率、且满足金融无套利约束的神经网络模型，以替代传统高耗时的实例级参数优化方法，从而让深度学习能够在高频、大规模的历史期权数据集上进行普适性的曲面平滑。</p>
-<hr />
-<h3 id="_6">任务二：技术背景与原理<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p><strong>1. 隐含波动率平滑（Implied Volatility Smoothing）背景</strong>
-*   <strong>什么是隐含波动率（IV）</strong>：在Black-Scholes（BS）期权定价模型中，除了标的资产的波动率 <span class="arithmatex">\(v\)</span> 外，其他参数（价格、行权价、到期时间、利率）均是已知的。将市场上的期权真实交易价格代入BS公式反推出来的 <span class="arithmatex">\(v\)</span>，就是隐含波动率。
-*   <strong>平滑的意义</strong>：市场上的期权报价是离散的（仅在特定的到期时间 <span class="arithmatex">\(\tau\)</span> 和对数资金要求 <span class="arithmatex">\(k\)</span> 上有报价），且存在买卖价差（噪声）。我们需要用一个连续的二维曲面函数 <span class="arithmatex">\(\hat{v}(\tau, k)\)</span> 来拟合这些离散点，以便为市场上没有挂牌的任意条款的期权定价（插值/外推）。
-*   <strong>无套利约束（核心挑战）</strong>：拟合出的曲面不能让交易员存在“稳赚不赔”的套利机会。数学上必须满足定理2.1：
-    *   <strong>日历套利（Calendar Arbitrage）</strong>：曲面沿着到期时间 <span class="arithmatex">\(\tau\)</span> 必须是非递减的。
-    *   <strong>行权价套利（Strike Arbitrage / Butterfly）</strong>：曲面沿着对数资金要求 <span class="arithmatex">\(k\)</span> 的切片必须满足特定的二阶导数非负条件（<span class="arithmatex">\(\text{But}\)</span> 函数 <span class="arithmatex">\(\ge 0\)</span>）。</p>
-<p><strong>2. 神经算子（Neural Operators, NO）原理</strong>
-*   <strong>传统NN的局限</strong>：传统神经网络（如MLP、CNN）是在有限维欧几里得空间中学习映射（比如 <span class="arithmatex">\(\mathbb{R}^n \to \mathbb{R}^m\)</span>），输入维度 <span class="arithmatex">\(n\)</span> 必须固定。但在期权市场，前一分钟有500个报价点，下一分钟可能变成505个，且坐标 <span class="arithmatex">\((\tau, k)\)</span> 全部变了。
-*   <strong>神经算子的降维打击</strong>：神经算子学习的是<strong>无穷维函数空间之间的映射</strong> <span class="arithmatex">\(\mathcal{F}: \mathcal{A} \to \mathcal{U}\)</span>。它认为你输入的离散数据点，只是某个隐式连续函数 <span class="arithmatex">\(a(x)\)</span> 在特定离散网格上的采样。
-*   <strong>图神经算子（GNO）</strong>：GNO通过核积分变换（Kernel Integral Transform）来实现算子学习。为了计算在连续空间上积分，GNO将其近似为在图结构（Graph）上的消息传递求和。输入点和输出点作为图的节点，根据空间距离连接边，从而实现“离散不变性”。</p>
-<hr />
-<h3 id="_7">任务三：提出的方法及原理（核心重点）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<h4 id="1_2">1. 如何将波动率平滑转化为“算子学习”问题？<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
-<p>这是本论文最精彩的切入点：
-*   <strong>经典算子学习</strong>：通常用于解偏微分方程（输入初始条件函数，输出未来时刻的解函数）。
-*   <strong>平滑问题的算子化</strong>：作者将真实的、连续的隐含波动率曲面假设为一个隐变量函数 <span class="arithmatex">\(v: D \to \mathbb{R}\)</span>（定义在到期日和行权价组成的定义域 <span class="arithmatex">\(D\)</span> 上）。我们观测到的市场数据 <span class="arithmatex">\(\mathbf{v} = v|_\pi\)</span>，只是该函数在有限个不规则坐标点集合 <span class="arithmatex">\(\pi = \{x_1, \dots, x_p\}\)</span> 上的求值。
-*   <strong>目标算子</strong>：我们的目标是学习一个<strong>恒等算子（Identity Operator）</strong> <span class="arithmatex">\(\mathcal{F}_{\text{id}}(v) = v\)</span>。
-*   <strong>模型训练</strong>：训练一个参数化的图神经算子 <span class="arithmatex">\(\tilde{F}^\theta\)</span>，让它接收离散的、随时变化的采样点 <span class="arithmatex">\(\mathbf{v}\)</span>，能够吐出整个连续空间的预测值。即对于任意给定的查询点 <span class="arithmatex">\(x \in D\)</span>（不论这个点在不在输入数据里），它都能输出 <span class="arithmatex">\(\hat{v}(x) \approx v(x)\)</span>。这样，<strong>数据拟合与插值问题，就被完美转化为了一个连续函数空间上的算子逼近问题</strong>。</p>
-<h4 id="2_1">2. 模型的输入输出与数据流模块<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
-<p>为了在计算时更稳定，作者将坐标转换为了 <span class="arithmatex">\(\rho = \sqrt{\tau}\)</span> 和 <span class="arithmatex">\(z = k/\rho\)</span>。模型定义域为二维坐标点 <span class="arithmatex">\(x = (\rho, z)\)</span>。</p>
-<ul>
-<li>
-<p><strong>模型输入</strong>：
-    观测到的期权隐含波动率点集 <span class="arithmatex">\(\mathbf{v} = \{v(x)\}_{x \in \pi_{\text{in}}}\)</span>。维度为 <span class="arithmatex">\(N_{\text{in}} \times 3\)</span>（包含坐标 <span class="arithmatex">\(\rho, z\)</span> 和对应的波动率值 <span class="arithmatex">\(v\)</span>）。查询输出的目标位置集 <span class="arithmatex">\(\pi_{\text{out}}\)</span>（维度为 <span class="arithmatex">\(N_{\text{out}} \times 2\)</span>）。</p>
-</li>
-<li>
-<p><strong>内部模块与数据流变化</strong>：</p>
-<p><strong>步骤0：图构造模块（Graph Construction - Nyström近似）</strong>
-对于每个我们要预测的目标点 <span class="arithmatex">\(y \in \pi_{\text{out}}\)</span>，通过计算欧式距离，在输入点集 <span class="arithmatex">\(\pi_{\text{in}}\)</span> 中找到离它最近的 <span class="arithmatex">\(K\)</span> 个邻居点（作者设定 <span class="arithmatex">\(K=50\)</span>），建立图的有向边。这定义了感受野 <span class="arithmatex">\(\mathcal{N}_{\text{in}}(y)\)</span>。</p>
-<p><strong>步骤1：提升层（Lifting Layer）</strong>
-只在输入点 <span class="arithmatex">\(x \in \pi_{\text{in}}\)</span> 上操作。通过全连接网络（MLP） <span class="arithmatex">\(\mathcal{P}_0\)</span>，将标量输入 <span class="arithmatex">\(v(x)\)</span> 映射到高维隐藏特征空间。
-*   <em>维度变化</em>：<span class="arithmatex">\(1 \to c_0\)</span> (实验中设通道数 <span class="arithmatex">\(c_0=16\)</span>)。
-*   <em>公式</em>：<span class="arithmatex">\(\tilde{h}_0(x) = \mathcal{P}_0(v(x))\)</span></p>
-<p><strong>步骤2：纯非局部积分层（第一层，解决插值问题的关键）</strong>
-传统GNO每一层包含局部线性变换（仅针对自身节点）和非局部积分（针对邻居节点）。<strong>但如果要预测的输出点 <span class="arithmatex">\(y\)</span> 在输入序列中不存在，局部变换就无法进行。</strong> 因此，作者在第1层<strong>丢弃了局部线性变换</strong>，纯靠邻居节点 <span class="arithmatex">\(\mathcal{N}_{\text{in}}(y)\)</span> 的核积分来生成目标点 <span class="arithmatex">\(y\)</span> 的初始隐状态。
-*   <em>原理</em>：核函数 <span class="arithmatex">\(\kappa_0\)</span> 作为一个MLP，接收边特征（<span class="arithmatex">\(y, x, \tilde{h}_0(x), v(x)\)</span>），输出一个 <span class="arithmatex">\(16 \times 16\)</span> 的权重矩阵。通过在邻居节点上加权求和，将信息汇聚到目标点 <span class="arithmatex">\(y\)</span>。
-*   <em>公式</em>：<span class="arithmatex">\(h_1(y) = (\sigma_0 \circ \mathcal{Q}_0) \Big( \mathcal{K}_0(\tilde{h}_0; \mathbf{v})(y) + b_0 \Big)\)</span>。此时，哪怕 <span class="arithmatex">\(y\)</span> 是全新的网格点，也获得了维度为 16 的隐特征。</p>
-<p><strong>步骤3：后续GNO隐藏层（第 <span class="arithmatex">\(j=1 \dots J-1\)</span> 层）</strong>
-由于在上一步所有输出点 <span class="arithmatex">\(y\)</span> 都已经有了隐状态，后续层可以同时使用局部线性变换 <span class="arithmatex">\(W_j\)</span>（保留自身特征）和核积分变换 <span class="arithmatex">\(\mathcal{K}_j\)</span>（吸收邻居特征）。
-*   <em>维度变化</em>：隐特征维持 <span class="arithmatex">\(16 \to 16\)</span> 维度流动，激活函数使用 GELU。
-*   <em>公式</em>：<span class="arithmatex">\(h_{j+1}(y) = (\sigma_j \circ \mathcal{Q}_j) \Big( W_j \tilde{h}_j(y) + \mathcal{K}_j(\tilde{h}_j; \mathbf{v})(y) + b_j \Big)\)</span></p>
-<p><strong>步骤4：投影层（Projection Layer）</strong>
-最后一层经过全连接网络 <span class="arithmatex">\(\mathcal{Q}_J\)</span> 和 Softplus激活函数（保证波动率为正数），将高维隐状态映射回标量预测值。
-*   <em>维度变化</em>：<span class="arithmatex">\(16 \to 1\)</span>。</p>
-</li>
-<li>
-<p><strong>模型输出</strong>：
-    目标点 <span class="arithmatex">\(y\)</span> 的平滑后的连续隐含波动率预测值 <span class="arithmatex">\(\hat{v}(y)\)</span>。</p>
-</li>
-</ul>
-<h4 id="3-loss-function">3. 物理/金融先验驱动的损失函数（Loss Function）<a class="headerlink" href="#3-loss-function" title="Permanent link">&para;</a></h4>
-<p>由于纯数据驱动的神经网络容易产生套利，作者设计了强力的联合损失函数：
-<span class="arithmatex">\(\mathcal{L} = \lambda_{\text{fit}}\mathcal{L}_{\text{fit}} + \lambda_{\text{but}}\mathcal{L}_{\text{but}} + \lambda_{\text{cal}}\mathcal{L}_{\text{cal}} + \lambda_{\text{reg}}\mathcal{L}_{\text{reg}}\)</span>
-1.  <strong>拟合损失 <span class="arithmatex">\(\mathcal{L}_{\text{fit}}\)</span></strong>：计算预测值与真实离散输入点的相对误差。作者还巧妙地加入了Black-Scholes Vega（期权价格对波动率的敏感度）作为权重，Vega越大的期权，权重越高（因为其价格误差影响更大）。
-2.  <strong>蝶式套利惩罚 <span class="arithmatex">\(\mathcal{L}_{\text{but}}\)</span></strong>：在合成的密集网格上，用有限差分法计算二阶导数函数 <span class="arithmatex">\(\text{But}(x, \hat{v}, \partial_z \hat{v}, \partial^2_z \hat{v})\)</span>。如果该值小于容忍度 <span class="arithmatex">\(\varepsilon\)</span>，则产生惩罚（使用 L1 范数促进稀疏惩罚）。
-3.  <strong>日历套利惩罚 <span class="arithmatex">\(\mathcal{L}_{\text{cal}}\)</span></strong>：沿着 <span class="arithmatex">\(\rho\)</span>（时间）方向计算导数，确保波动率曲面随时间单调递增。若违反单调性，则施加惩罚。
-4.  <strong>正则化 <span class="arithmatex">\(\mathcal{L}_{\text{reg}}\)</span></strong>：计算输出曲面在时间和行权价方向上的拉普拉斯算子（二阶导），促使生成的曲面在视觉和数值上极其平滑。</p>
-<hr />
-<h3 id="_8">任务四：实验部分简要介绍<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p><strong>1. 数据集</strong>
-*   <strong>训练与验证集</strong>：使用芝加哥期权交易所（CBOE）<strong>标普500指数（S&amp;P 500）</strong> 2012年至2020年的高频盘中数据（每20分钟一个切片，共产生超4万个曲面和6千万个数据点）。
-*   <strong>测试集</strong>：
-    *   同分布测试：S&amp;P 500 在2021年全年的高频数据。
-    *   <strong>泛化性测试</strong>（极大亮点）：模型在<strong>未经过任何训练</strong>的情况下，直接在其他三大指数——纳斯达克100（NDX）、道琼斯（DJX）、罗素2000（RUT）的日终（End-of-day）数据上进行测试，展现出极强的零样本泛化能力。</p>
-<p><strong>2. 评价指标</strong>
-*   <strong>表面平均绝对百分比误差（MAPE / <span class="arithmatex">\(\langle \delta_{\text{abs}} \rangle\)</span>）</strong>：衡量平滑后曲面和原始市场离散报价点之间的相对偏差。
-*   <strong>买卖价差内比例（<span class="arithmatex">\(\langle \delta_{\text{spr}} \rangle\)</span>）</strong>：衡量预测的名义价格误差相对于期权买卖价差的大小。只要该值 <span class="arithmatex">\(\le 1\)</span>，意味着模型的定价落在市场的实际买卖报价区间内（这是交易员最看重的指标）。
-*   <strong>套利损失评估</strong>：统计 <span class="arithmatex">\(\mathcal{L}_{\text{but}}\)</span> 和 <span class="arithmatex">\(\mathcal{L}_{\text{cal}}\)</span> 的平均值，以此证明生成的曲面不存在静态套利。</p>
-<p><strong>3. 对比基线（Baselines）</strong>
-*   <strong>工业界标准（SVI）</strong>：Gatheral 提出的经典参数化随机波动率启发模型，使用带约束的SLSQP优化器针对每一个历史截面单独进行校准。
-*   <strong>经典神经网络架构（Deep Smoothing / DS，Ackerer等 2020）</strong>：当前最优的深度学习方案之一，但该方案是“实例级”的——即需要针对<strong>每一个曲面单独训练一个神经网络</strong>（测试集如果有一万个时间点，就需要训练一万次神经网络），而本文的方法（OpDS）是一个网络跑通全历史数据。</p>
-<p><strong>实验结果结论：</strong>
-本方法的预测MAPE（约0.5%）和买卖价差拟合度均大幅优于工业界标准SVI（1%~2%）。更重要的是，生成一个曲面的推理时间极短，且完美满足无套利要求；相较于传统的神经网络方法（DS），在参数量和时间成本上实现了指数级的压缩（一个模型 vs 几万个模型）。</p>
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI5MDE0MTAzNl19
+eyJoaXN0b3J5IjpbMTc1ODU2MTU5OCwtMjkwMTQxMDM2XX0=
 -->
 
 
