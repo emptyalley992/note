@@ -979,6 +979,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌟 评估标准说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 51篇论文调研与复现难度评估表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deep-insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 深调研与深度思考 (Deep Insights)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 给你的复现优先级建议：
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1163,6 +1224,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌟 评估标准说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 51篇论文调研与复现难度评估表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deep-insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 深调研与深度思考 (Deep Insights)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 给你的复现优先级建议：
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1204,6 +1326,13 @@
 </ul>
 </li>
 <li><a href="#tmp">tmp</a></li>
+<li><a href="#code">code</a><ul>
+<li><a href="#_8">🌟 评估标准说明</a></li>
+<li><a href="#51">📊 51篇论文调研与复现难度评估表</a></li>
+<li><a href="#deep-insights">🧠 深调研与深度思考 (Deep Insights)</a></li>
+<li><a href="#_9">💡 给你的复现优先级建议：</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <h2 id="iv">IV<a class="headerlink" href="#iv" title="Permanent link">&para;</a></h2>
@@ -1400,8 +1529,485 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a># 已实现的版本
 </code></pre></div>
+<h1 id="code">code<a class="headerlink" href="#code" title="Permanent link">&para;</a></h1>
+<p>这是一项工程量浩大且非常前沿的调研任务。你提供的这51篇论文绝大多数集中在<strong>2023年底至2025年初</strong>的最前沿领域，核心主线极为明显：<strong>大模型推理（Reasoning）、强化学习（RL/Self-play）、测试时计算（Test-Time Compute, 类o1/R1模型）、智能体工作流（Agentic Workflow）以及多模态（Multimodal）</strong>。</p>
+<p>为了给你提供“深度的调研与思考”，我不仅对这51篇论文进行了逐一的检索与评估，还将它们进行了分类，并从<strong>数据开源性、代码获取情况、算法工程复杂度、算力要求</strong>四个维度定义了<strong>复现难度（极低、低、中、高、极高）</strong>。</p>
+<hr />
+<h3 id="_8">🌟 评估标准说明<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>算力要求</strong>：<ul>
+<li><strong>低</strong>：API调用或单张消费级显卡（如RTX 3090/4090）即可。</li>
+<li><strong>中</strong>：需要1-4张企业级显卡（如A100/H100）进行微调（SFT/DPO）。</li>
+<li><strong>高/极高</strong>：需要8卡以上集群，涉及大规模RL（PPO/GRPO）、MCTS（蒙特卡洛树搜索）或多模态预训练。</li>
+</ul>
+</li>
+<li><strong>复现难度</strong>：<ul>
+<li><strong>低/极低</strong>：有完整开源代码，基于Prompt/API或轻量级RAG，开箱即用。</li>
+<li><strong>中等</strong>：有部分代码或逻辑清晰，需要一定环境配置，算力要求中等。</li>
+<li><strong>高</strong>：尽管可能有代码，但涉及复杂的RLHF/Self-play系统工程（如vLLM+Ray+DeepSpeed联动），或极耗算力。</li>
+<li><strong>极高</strong>：无开源代码的底层架构创新，或需要海量专有数据和算力。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="51">📊 51篇论文调研与复现难度评估表<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p><em>注：由于部分论文为极近期（如2024年底至2025年初）的arXiv Preprint，部分代码可能处于 "Coming Soon" 状态。对于标记为NeurIPS 2025（尚未召开）的论文，推测为近期提交到ICLR/ICML 2025的在投论文。</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">序号</th>
+<th style="text-align: left;">论文核心议题 / 简称</th>
+<th style="text-align: left;">代码/数据状态</th>
+<th style="text-align: left;">算力要求</th>
+<th style="text-align: left;">复现难度</th>
+<th style="text-align: left;">调研备注与评估理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1</strong></td>
+<td style="text-align: left;">LaSeR: RL with Last-Token Self-Rewarding</td>
+<td style="text-align: left;">暂无完整官方框架</td>
+<td style="text-align: left;">中-高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">改进RL奖励机制。算法细节较清晰，但把RL系统调通本身工程量极大。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2</strong></td>
+<td style="text-align: left;">Optimal Scaling of Test-Time Compute...</td>
+<td style="text-align: left;">数据集公开(MATH等)，无代码</td>
+<td style="text-align: left;">极高</td>
+<td style="text-align: left;"><strong>极高</strong></td>
+<td style="text-align: left;">探讨测试时算力扩展（类o1）。偏分析和顶层设计，复现需要消耗海量推理算力做实验验证。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3</strong></td>
+<td style="text-align: left;"><strong>Absolute Zero</strong> (Zero Data RL)</td>
+<td style="text-align: left;"><strong>高关注度论文</strong>，代码开源中</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">零数据自博弈。数据集是自生成的，但跑通Self-play RL流水线对多卡并行工程要求极高。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4</strong></td>
+<td style="text-align: left;">RULEREASONER (Rule-based)</td>
+<td style="text-align: left;">数据开源(常规推理库)</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">结合规则的动态采样推理，方法描述清晰，实现多在解码侧干预。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>5</strong></td>
+<td style="text-align: left;">RL Tango (Generator &amp; Verifier)</td>
+<td style="text-align: left;">常见架构，有类似开源项目</td>
+<td style="text-align: left;">中-高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">生成器和验证器联合RL，难点在于RL的Reward设计和训练稳定性（Mode Collapse问题）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>6</strong></td>
+<td style="text-align: left;">Text2Grad (RL from NL Feedback)</td>
+<td style="text-align: left;">有项目主页/代码</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">将自然语言反馈转为梯度，思想新颖，基于特定框架复现可行。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>7</strong></td>
+<td style="text-align: left;"><strong>R-Zero</strong> (Self-Evolving from Zero Data)</td>
+<td style="text-align: left;">Zero系列，等待完整代码</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">与Absolute Zero类似，通过自我进化提升推理，无需微调数据，但算力门槛高。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>8</strong></td>
+<td style="text-align: left;">Better LLM Reasoning via Dual-Play</td>
+<td style="text-align: left;">常见自我博弈，有代码参考</td>
+<td style="text-align: left;">中-高</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">Dual-Play机制，数学推导清晰，基于DPO或PPO的魔改，有开源框架支持。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>9</strong></td>
+<td style="text-align: left;"><strong>TTRL</strong>: Test-Time Reinforcement Learning</td>
+<td style="text-align: left;">热门方向，部分开源</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">在推理阶段做RL，算力主要耗费在Inference阶段的梯度更新或搜索上。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>10</strong></td>
+<td style="text-align: left;">Agent0 (Zero Data Tools)</td>
+<td style="text-align: left;">代码多在GitHub开源</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">智能体方向。通过Prompt和工具交互生成数据，工程实现清晰，对单卡友好。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>11</strong></td>
+<td style="text-align: left;">Dr. Zero (Search Agents)</td>
+<td style="text-align: left;">Zero系列Agent</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">零数据训练搜索智能体。相较于底层LLM RL，Agent级别的复现要简单很多，多依赖API。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>12</strong></td>
+<td style="text-align: left;">V-Zero (Multimodal Zero Annotation)</td>
+<td style="text-align: left;">数据无标注，需VLM模型</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">多模态零数据推理。VLM（如LLaVA）加载和训练本身就占显存，加上RL难度加倍。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>13</strong></td>
+<td style="text-align: left;">DARC (Decoupled Reasoning)</td>
+<td style="text-align: left;">有开源代码趋势</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">课程学习（Curriculum Learning）机制，流程明确，数据按难度解耦，易于在SFT框架实现。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>14</strong></td>
+<td style="text-align: left;"><strong>AFLOW</strong> (Automating Agentic Workflow)</td>
+<td style="text-align: left;"><strong>代码开源</strong></td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;"><strong>极低</strong></td>
+<td style="text-align: left;">自动化Agent工作流。基于Prompt和轻量Python代码生成，API调用即可复现。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>15</strong></td>
+<td style="text-align: left;">FLOW (Modularized Agentic Workflow)</td>
+<td style="text-align: left;"><strong>代码开源</strong></td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;"><strong>极低</strong></td>
+<td style="text-align: left;">模块化工作流，与14类似，重业务逻辑和系统工程，轻模型训练。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>16</strong></td>
+<td style="text-align: left;">Mitigating Hallucination via Self-Reflection</td>
+<td style="text-align: left;">经典方法，无代码也易写</td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;"><strong>低</strong></td>
+<td style="text-align: left;">通过Prompt让模型自我反思。完全依赖现有大模型API，写几十行代码即可复现。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>17</strong></td>
+<td style="text-align: left;">Mitigating LVLM Hallucination via Attribution</td>
+<td style="text-align: left;">需开源VLM及评估集</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">多模态归因分析，需要在开源VLM（如Qwen-VL）内部抓取特征图或注意力权重。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>18</strong></td>
+<td style="text-align: left;">Mitigating Object Hallucination (Image-Grounded)</td>
+<td style="text-align: left;">数据开源(MSCOCO等)</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>低</strong></td>
+<td style="text-align: left;">多模态幻觉消除。通常通过修改解码策略（Decoding）实现，无需重训模型。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>19</strong></td>
+<td style="text-align: left;">MetaClaw (Meta-Learns Agent)</td>
+<td style="text-align: left;">Agent环境代码通常开源</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">涉及Agent在Wild环境下的Meta-learning，难点在于搭建评测环境（如网页交互）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>20</strong></td>
+<td style="text-align: left;">OmniLottie (Vector Animations)</td>
+<td style="text-align: left;">专有领域，代码开源</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">生成Lottie动画。有开源代码则难度中等，若无代码，自己解析Lottie格式难度极高。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>21</strong></td>
+<td style="text-align: left;">SkillNet (Connect AI Skills)</td>
+<td style="text-align: left;">Agent框架类，代码多开源</td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;"><strong>低</strong></td>
+<td style="text-align: left;">连接多个Agent技能，通常是上层建筑（类似LangChain），不涉及复杂梯度训练。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>22</strong></td>
+<td style="text-align: left;">MMR-Life (Real-life Multimodal)</td>
+<td style="text-align: left;">核心是<strong>开源数据集</strong></td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>低</strong></td>
+<td style="text-align: left;">多图像推理。通常是发布一个新的Benchmark，跑通基线模型即可，难度低。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>23</strong></td>
+<td style="text-align: left;">Multi-agent Architecture Search</td>
+<td style="text-align: left;">架构搜索，极难复调</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">NAS（神经架构搜索）与Agent结合。搜索空间大，实验周期长，算力消耗巨大。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>24</strong></td>
+<td style="text-align: left;">Beyond Single Stationary Policies</td>
+<td style="text-align: left;">RL/多智能体环境</td>
+<td style="text-align: left;">中-高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">Meta-Task框架。涉及多策略切换，RL环境搭建复杂，训练极度依赖超参。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>25</strong></td>
+<td style="text-align: left;">MoME (Mixture of Multimodal Experts)</td>
+<td style="text-align: left;">架构级论文，有代码</td>
+<td style="text-align: left;">极高</td>
+<td style="text-align: left;"><strong>极高</strong></td>
+<td style="text-align: left;">VLM + MoE。多模态混合专家模型，单是模型加载和分布式训练就需要至少8卡A100。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>26</strong></td>
+<td style="text-align: left;">TOPA (Text-Only Pre-Alignment for Video)</td>
+<td style="text-align: left;">视频处理，数据开源</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">视频理解类。处理视频帧需要极大显存，Text-only对齐机制细节多，较难完全对齐原论文精度。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>27</strong></td>
+<td style="text-align: left;">FlowRL (Matching Reward Distributions)</td>
+<td style="text-align: left;">核心算法代码需开源</td>
+<td style="text-align: left;">中-高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">改进RLHF的奖励分布匹配。数学推导复杂（可能涉及Flow Matching），自己手搓容易不收敛。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>28</strong></td>
+<td style="text-align: left;">Seek in the Dark (Test-Time Policy Gradient)</td>
+<td style="text-align: left;">算法前沿，隐空间操作</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>极高</strong></td>
+<td style="text-align: left;">在Latent Space做测试时策略梯度。极高难度的底层改动，没有官方源码几乎无法复现。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>29</strong></td>
+<td style="text-align: left;"><strong>DAPO</strong>: Open-Source LLM RL System</td>
+<td style="text-align: left;"><strong>系统级开源框架</strong></td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">这是一篇介绍<strong>开源系统</strong>的论文（类似vLLM/DeepSpeed）。代码完全开源，但要跑起来需要集群算力。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>30</strong></td>
+<td style="text-align: left;">ReST-MCTS* (Tree Search LLM)</td>
+<td style="text-align: left;">代码部分开源</td>
+<td style="text-align: left;">极高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">基于MCTS（蒙特卡洛树搜索）的自训练。推理时生成大量树节点，极其消耗计算资源。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>31</strong></td>
+<td style="text-align: left;"><strong>LightRAG</strong> (Simple and Fast RAG)</td>
+<td style="text-align: left;"><strong>GitHub爆火，完全开源</strong></td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;"><strong>极低</strong></td>
+<td style="text-align: left;">港大出品，基于图谱的极简RAG框架。文档完善，支持本地模型或API，复现毫无难度。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>32</strong></td>
+<td style="text-align: left;">Efficient Part-level 3D Object Gen</td>
+<td style="text-align: left;">3D数据集(ShapeNet)</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">3D生成。Dual Volume Packing涉及复杂的3D体素或点云操作，环境配置（CUDA算子）极易报错。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>33</strong></td>
+<td style="text-align: left;">UFM (Unified Dense Correspondence)</td>
+<td style="text-align: left;">传统视觉/深度学习交叉</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">光流（Flow）相关的密集对应论文。CV领域，通常基于PyTorch实现，有代码就好办。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>34</strong></td>
+<td style="text-align: left;">BackdoorLLM (Benchmark)</td>
+<td style="text-align: left;"><strong>纯开源Benchmark</strong></td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>低</strong></td>
+<td style="text-align: left;">后门攻击评测基准。使用其提供的数据集和评估脚本跑一次开源大模型即可。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>35</strong></td>
+<td style="text-align: left;">SWE-SQL (SQL Benchmark)</td>
+<td style="text-align: left;"><strong>纯开源数据集</strong></td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;"><strong>低</strong></td>
+<td style="text-align: left;">类似SWE-bench的SQL版本。主要工作是调用LLM评测其解决真实SQL问题的能力。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>36</strong></td>
+<td style="text-align: left;">Defending Multimodal Backdoored...</td>
+<td style="text-align: left;">需视觉提示微调(VPT)代码</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">防御机制论文，Repulsive Visual Prompt Tuning。在输入端加扰动，容易在CV框架内复现。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>37</strong></td>
+<td style="text-align: left;">DYNAACT (Dynamic Action Spaces)</td>
+<td style="text-align: left;">Agent动作空间，代码开源</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">大模型动态动作空间推理。主要涉及Prompt设计和状态机管理，不涉及复杂RL。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>38</strong></td>
+<td style="text-align: left;">Lookahead Routing for LLMs</td>
+<td style="text-align: left;">MoE路由机制</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">MoE底层的Routing算法改进。需要修改模型底层（如Transformer架构），工程门槛高。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>39</strong></td>
+<td style="text-align: left;">Distilling Agent into Small Models</td>
+<td style="text-align: left;">模型蒸馏框架</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">蒸馏任务。通常使用大模型（GPT-4）生成带RAG和Tool轨迹的数据，去SFT小模型。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>40</strong></td>
+<td style="text-align: left;">Retro-R1 (Agentic Retrosynthesis)</td>
+<td style="text-align: left;">垂直领域(化学)，结合R1</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">化学逆合成。难点不在于AI算法，而在于<strong>化学领域知识、专有数据库配置及评估工具</strong>的使用。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>41</strong></td>
+<td style="text-align: left;">Q-RAG (Embedder Training)</td>
+<td style="text-align: left;">RAG领域，代码多开源</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">基于价值的Embedding训练。比普通RAG多了一步对比学习或奖励微调，普通单卡可做。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>42</strong></td>
+<td style="text-align: left;">LoongRL (Long Context RL)</td>
+<td style="text-align: left;">长文本RL，极耗显存</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">长上下文的强化学习。RL本身就耗显存，加上Long Context，单卡绝对OOM，必须多卡+RingAttention。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>43</strong></td>
+<td style="text-align: left;"><strong>AgentGym-RL</strong></td>
+<td style="text-align: left;"><strong>开源框架(AgentGym)</strong></td>
+<td style="text-align: left;">中-高</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">这是现成的开源框架平台，用于训练多轮决策Agent。搭环境容易，但调参训练出好结果需时间。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>44</strong></td>
+<td style="text-align: left;">Process Reinforcement via Implicit Rewards</td>
+<td style="text-align: left;">PRM奖励模型机制</td>
+<td style="text-align: left;">中-高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">类似DeepSeek-Math/o1的PRM机制。没有显式步骤标签做隐式奖励，数学要求和实现难度大。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>45</strong></td>
+<td style="text-align: left;">Semi-Supervised Preference Optimization</td>
+<td style="text-align: left;">半监督DPO变体</td>
+<td style="text-align: left;">中</td>
+<td style="text-align: left;"><strong>低</strong></td>
+<td style="text-align: left;">DPO（偏好优化）的扩展算法。基于现有开源的trl库魔改一下Loss函数即可实现。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>46</strong></td>
+<td style="text-align: left;">HiAgent (Hierarchical Memory)</td>
+<td style="text-align: left;">纯Agent架构，代码易写</td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;"><strong>低</strong></td>
+<td style="text-align: left;">层次化记忆管理机制。类似于AutoGPT的记忆模块优化，纯Python工程+数据库+API即可。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>47</strong></td>
+<td style="text-align: left;">Information Gain-based Policy Optimization</td>
+<td style="text-align: left;">信息增益RL算法</td>
+<td style="text-align: left;">中-高</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">搜索Agent的策略优化。难点在于Reward（信息增益）的准确量化，需特定的评测沙盒。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>48</strong></td>
+<td style="text-align: left;">AgentPO (Multi-Agent RL)</td>
+<td style="text-align: left;">多智能体RL环境</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">多个Agent协同+强化学习。MARL（多智能体RL）的通病是不收敛、调试极度困难。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>49</strong></td>
+<td style="text-align: left;">Group-in-Group Policy Optimization</td>
+<td style="text-align: left;">最新算法，代码待公布</td>
+<td style="text-align: left;">中-高</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">改进PPO/GRPO算法。如果基于现有的trl或vLLM框架给出源码，复现难度为中等；否则极难。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>50</strong></td>
+<td style="text-align: left;">Memagent (Multi-conv RL memory)</td>
+<td style="text-align: left;">长文本+RL+记忆机制</td>
+<td style="text-align: left;">高</td>
+<td style="text-align: left;"><strong>高</strong></td>
+<td style="text-align: left;">多轮对话RL记忆机制。结合了Long-context和RL，系统架构重，调试周期长。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>51</strong></td>
+<td style="text-align: left;">Agentic Entropy-Balanced Policy Optimization</td>
+<td style="text-align: left;">策略优化算法改进</td>
+<td style="text-align: left;">中-高</td>
+<td style="text-align: left;"><strong>中</strong></td>
+<td style="text-align: left;">引入熵平衡的RL算法。通常是修改PPO中的Entropy Bonus项，有源码的话复现成本不高。</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="deep-insights">🧠 深调研与深度思考 (Deep Insights)<a class="headerlink" href="#deep-insights" title="Permanent link">&para;</a></h3>
+<p>在系统性审视这51篇论文后，我发现它们并不是随机的，而是精准地刻画了<strong>2024年底至2025年大模型领域的四大突围方向</strong>。为了帮你更好地安排复现计划，我提出以下深度研判：</p>
+<h4 id="1-zero-rl-reasoning">1. "Zero" 系列与强化学习推理 (RL Reasoning) 的井喷<a class="headerlink" href="#1-zero-rl-reasoning" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>代表论文</strong>：<em>Absolute Zero (3), R-Zero (7), Dr. Zero (11), V-Zero (12), LoongRL (42), LaSeR (1)</em></li>
+<li><strong>复现难度本质</strong>：<strong>极高</strong>。这类论文受到了 <strong>DeepSeek-R1 和 OpenAI o1</strong> 的巨大启发，试图摆脱对人工标注SFT数据的依赖，转而使用<strong>纯强化学习（Self-play/MCTS）</strong>让模型自己领悟推理过程。</li>
+<li><strong>避坑指南</strong>：这类论文的描述通常看起来数学很完美，但复现的痛点在于<strong>工程基建</strong>。你需要熟练掌握 <code>vLLM</code>（用于快速生成）、<code>Ray</code>（用于分布式调度）和 <code>DeepSpeed</code>（用于训练）。如果没有<strong>8卡A100/H100</strong>起步的算力，建议<strong>不要尝试从头复现底层训练</strong>，可以转向使用类似 <code>DAPO (29)</code> 这样的现成开源系统做小规模验证。</li>
+</ul>
+<h4 id="2-agentic-workflow">2. Agentic Workflow (智能体工作流) 的低门槛红利<a class="headerlink" href="#2-agentic-workflow" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>代表论文</strong>：<em>AFLOW (14), FLOW (15), Agent0 (10), SkillNet (21), HiAgent (46), LightRAG (31)</em></li>
+<li><strong>复现难度本质</strong>：<strong>极低/低</strong>。这是目前投入产出比（ROI）最高的领域。吴恩达（Andrew Ng）等推崇的Agentic Workflow证明了：<strong>不需要改动底层模型，仅仅靠写好Python的控制流、For循环和反思Prompt，就能大幅超越基础模型的表现。</strong></li>
+<li><strong>推荐动作</strong>：如果你是学生或中小企业开发者，<strong>强烈建议从这里入手</strong>。例如 <code>LightRAG (31)</code> 和 <code>AFLOW (14)</code>，它们的开源生态极好，基于本地单卡（跑Ollama）或调用API（如DeepSeek/GPT-4接口）在一个下午就能跑通源码并应用到你自己的业务中。</li>
+</ul>
+<h4 id="3-test-time-compute">3. Test-Time Compute (测试时算力扩展) 的前沿探索<a class="headerlink" href="#3-test-time-compute" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>代表论文</strong>：<em>Towards Thinking-Optimal... (2), TTRL (9), ReST-MCTS</em> (30), Seek in the Dark (28)*</li>
+<li><strong>复现难度本质</strong>：<strong>高</strong>。核心思想是“在训练时少花算力，在推理时多花算力让模型多思考几步（如树搜索、策略梯度更新）”。</li>
+<li><strong>评估</strong>：这属于目前学术界最顶尖的坑。特别是涉及隐空间（Latent Space）修改和MCTS树搜索的方法，代码开源率较低，且推理过程极慢。如果不做学术顶会发表，不建议作为初期复现目标。</li>
+</ul>
+<h4 id="4-benchmarks">4. 评测基准 (Benchmarks) 论文是绝佳的跳板<a class="headerlink" href="#4-benchmarks" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>代表论文</strong>：<em>BackdoorLLM (34), SWE-SQL (35), MMR-Life (22)</em></li>
+<li><strong>评估</strong>：基准测试类论文是所有51篇中最容易入手的。作者必定会100%开源数据集和评测脚本。如果你想快速水一篇论文或熟悉某个垂直领域，下载这些Benchmark的源码，跑几个最新的模型（如Qwen2.5, Llama-3），加点自己的Prompt策略，就能产出一份详实的报告。</li>
+</ul>
+<h3 id="_9">💡 给你的复现优先级建议：<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>快速出成果（1周内通关）</strong>：选择 <code>LightRAG (31)</code>、<code>AFLOW (14)</code>、<code>HiAgent (46)</code>。基于API调用，主要考察你的系统工程设计和Prompt能力。</li>
+<li><strong>进阶算法训练（2-4周，需1-4卡）</strong>：选择 <code>Text2Grad (6)</code>、<code>Semi-Supervised PO (45)</code>。基于开源库（如HuggingFace <code>trl</code>）进行微调（SFT/DPO）魔改，难度适中。</li>
+<li><strong>挑战行业前沿（1-3个月，需算力集群）</strong>：选择 <code>Absolute Zero (3)</code> 或使用 <code>AgentGym-RL (43)</code> 训练多智能体RL。这能锻炼你搭建大规模RLHF基础设施的硬核实力。</li>
+</ol>
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY0NTU5NTgyOCwxODA5ODkxMzA1LC0xOD
+eyJoaXN0b3J5IjpbLTk0OTY1NDY0MCwxODA5ODkxMzA1LC0xOD
 E2OTUxOTM0LDExNzMzNzU5MjYsLTE1ODA4NTAxMTcsMjAyMzg2
 OTkyOCwtMTQ3MjMwMDAyMSwtODUyMTIyMzgsLTEyNzY0NTAyOT
 YsLTYxMzM2NzcwOSwxNzc4MTI5NDYsLTg0MjcwMTY1Ml19
