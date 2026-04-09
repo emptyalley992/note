@@ -1389,23 +1389,22 @@ $<span class="arithmatex">\(L(\theta) = \mathbb{E} \left[ \left( \sum_{k=0}^{n-1
 <p><strong>实验结论：</strong>
 OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期内，其 <strong>Total Return (TR)</strong> 在 BTC 上达到 33.10%，ETH 上达到 44.89%，而传统的 GARCH 和简单的 LSTM 模型在复杂的期权环境下大多表现为亏损。</p>
 <h1 id="tmp">tmp<a class="headerlink" href="#tmp" title="Permanent link">&para;</a></h1>
-<p>``
-    你是一个光电方向的专家，同时也是一个ai专家，研究方向为二者的交叉，你当前在进行一个实验，对番茄喷洒农药，然后对齐进行光谱分析，根据光谱结果来预测所喷洒的农药的浓度。从ai的角度理解，我现在有一堆样本数据，其存储在excel表格中，其中每行是一个样本（首行是列名），最后一列是预测的label值，例如，0表示未喷洒农药，0.5表示喷洒农药其浓度为0.5；1表示喷洒农药浓度为1。前面438列表示不同的频段。注意这是一个回归任务，在指标里需要你计算R2.
-    我已经实现了一个简易版本的代码，我需要你审计我的代码，思考改进的方案，改进的思路包括数据预处理（可能包括对光谱数据的特殊处理，如多元散射校正MSC等）、预测模型等。
-    我可以为你提供的信息是多元散射校正 (MSC）是一个相对好一点的预处理方法
-    需要你深度思考，给出思考改进方法的思维过程。</p>
-<div class="highlight"><pre><span></span><code># 输出python代码要求：
-在一个python文件中，包括文件读取，数据预处理，数据集划分，模型训练，模型测试，测试结果的保存，测试结果的性能（准确率等）的输出
-深度学习代码要使用pytorch编写
-
-# 已实现的版本
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>你是一个光电方向的专家，同时也是一个ai专家，研究方向为二者的交叉，你当前在进行一个实验，对番茄喷洒农药，然后对齐进行光谱分析，根据光谱结果来预测所喷洒的农药的浓度。从ai的角度理解，我现在有一堆样本数据，其存储在excel表格中，其中每行是一个样本（首行是列名），最后一列是预测的label值，例如，0表示未喷洒农药，0.5表示喷洒农药其浓度为0.5；1表示喷洒农药浓度为1。前面438列表示不同的频段。注意这是一个回归任务，在指标里需要你计算R2.
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>我已经实现了一个简易版本的代码，我需要你审计我的代码，思考改进的方案，改进的思路包括数据预处理（可能包括对光谱数据的特殊处理，如多元散射校正MSC等）、预测模型等。
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>我可以为你提供的信息是多元散射校正 (MSC）是一个相对好一点的预处理方法
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>需要你深度思考，给出思考改进方法的思维过程。
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a># 输出python代码要求：
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>在一个python文件中，包括文件读取，数据预处理，数据集划分，模型训练，模型测试，测试结果的保存，测试结果的性能（准确率等）的输出
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>深度学习代码要使用pytorch编写
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a># 已实现的版本
 </code></pre></div>
-<p>``</p>
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODIxMzA3MjYyLDE4MDk4OTEzMDUsLTE4MT
-Y5NTE5MzQsMTE3MzM3NTkyNiwtMTU4MDg1MDExNywyMDIzODY5
-OTI4LC0xNDcyMzAwMDIxLC04NTIxMjIzOCwtMTI3NjQ1MDI5Ni
-wtNjEzMzY3NzA5LDE3NzgxMjk0NiwtODQyNzAxNjUyXX0=
+eyJoaXN0b3J5IjpbLTY0NTU5NTgyOCwxODA5ODkxMzA1LC0xOD
+E2OTUxOTM0LDExNzMzNzU5MjYsLTE1ODA4NTAxMTcsMjAyMzg2
+OTkyOCwtMTQ3MjMwMDAyMSwtODUyMTIyMzgsLTEyNzY0NTAyOT
+YsLTYxMzM2NzcwOSwxNzc4MTI5NDYsLTg0MjcwMTY1Ml19
 -->
 
 
