@@ -229,24 +229,25 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 
 # tmp
 
-``
-	你是一个光电方向的专家，同时也是一个ai专家，研究方向为二者的交叉，你当前在进行一个实验，对番茄喷洒农药，然后对齐进行光谱分析，根据光谱结果来预测所喷洒的农药的浓度。从ai的角度理解，我现在有一堆样本数据，其存储在excel表格中，其中每行是一个样本（首行是列名），最后一列是预测的label值，例如，0表示未喷洒农药，0.5表示喷洒农药其浓度为0.5；1表示喷洒农药浓度为1。前面438列表示不同的频段。注意这是一个回归任务，在指标里需要你计算R2.
-	我已经实现了一个简易版本的代码，我需要你审计我的代码，思考改进的方案，改进的思路包括数据预处理（可能包括对光谱数据的特殊处理，如多元散射校正MSC等）、预测模型等。
-	我可以为你提供的信息是多元散射校正 (MSC）是一个相对好一点的预处理方法
-	需要你深度思考，给出思考改进方法的思维过程。
+```
+你是一个光电方向的专家，同时也是一个ai专家，研究方向为二者的交叉，你当前在进行一个实验，对番茄喷洒农药，然后对齐进行光谱分析，根据光谱结果来预测所喷洒的农药的浓度。从ai的角度理解，我现在有一堆样本数据，其存储在excel表格中，其中每行是一个样本（首行是列名），最后一列是预测的label值，例如，0表示未喷洒农药，0.5表示喷洒农药其浓度为0.5；1表示喷洒农药浓度为1。前面438列表示不同的频段。注意这是一个回归任务，在指标里需要你计算R2.
+我已经实现了一个简易版本的代码，我需要你审计我的代码，思考改进的方案，改进的思路包括数据预处理（可能包括对光谱数据的特殊处理，如多元散射校正MSC等）、预测模型等。
+我可以为你提供的信息是多元散射校正 (MSC）是一个相对好一点的预处理方法
+需要你深度思考，给出思考改进方法的思维过程。
 
-	# 输出python代码要求：
-	在一个python文件中，包括文件读取，数据预处理，数据集划分，模型训练，模型测试，测试结果的保存，测试结果的性能（准确率等）的输出
-	深度学习代码要使用pytorch编写
+# 输出python代码要求：
+在一个python文件中，包括文件读取，数据预处理，数据集划分，模型训练，模型测试，测试结果的保存，测试结果的性能（准确率等）的输出
+深度学习代码要使用pytorch编写
+	
+# 已实现的版本
 
-	# 已实现的版本
-``
+```
 
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODIxMzA3MjYyLDE4MDk4OTEzMDUsLTE4MT
-Y5NTE5MzQsMTE3MzM3NTkyNiwtMTU4MDg1MDExNywyMDIzODY5
-OTI4LC0xNDcyMzAwMDIxLC04NTIxMjIzOCwtMTI3NjQ1MDI5Ni
-wtNjEzMzY3NzA5LDE3NzgxMjk0NiwtODQyNzAxNjUyXX0=
+eyJoaXN0b3J5IjpbLTY0NTU5NTgyOCwxODA5ODkxMzA1LC0xOD
+E2OTUxOTM0LDExNzMzNzU5MjYsLTE1ODA4NTAxMTcsMjAyMzg2
+OTkyOCwtMTQ3MjMwMDAyMSwtODUyMTIyMzgsLTEyNzY0NTAyOT
+YsLTYxMzM2NzcwOSwxNzc4MTI5NDYsLTg0MjcwMTY1Ml19
 -->
