@@ -379,16 +379,16 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 3.	Absolute Zero: Reinforced Self-play Reasoning with Zero Data
 4.	RULEREASONER: REINFORCED RULE-BASED REASONING VIA DOMAIN-AWARE DYNAMIC SAMPLING
 5.	RL Tango: Reinforcing Generator and Verifier Together for Language Reasoning
-6.	Text2Grad: Reinforcement Learning from Natural Language Feedback
+6.	T
 7.	R-Zero: Self-Evolving Reasoning LLM from Zero Data
 8.	Better LLM Reasoning via Dual-Play
-9.	TTRL: Test-Time Reinforcement Learning
+9.	T
 10.	Agent0: Unleashing Self-Evolving Agents from Zero Data via Tool-Integrated Reasoning
 11.	Dr. Zero: Self-Evolving Search Agents without Training Data
 12.	V-Zero: Self-Improving Multimodal Reasoning with Zero Annotation
 13.	DARC: Decoupled Asymmetric Reasoning Curriculum for LLM Evolution
-14.	AFLOW:  AUTOMATING AGENTIC WORKFLOW GENERATION
-15.	FLOW: 
+14.	A
+15.	FL
 16.	To
 17.	UNDERSTANDING AND MITIGATING HALLUCINATION IN LARGE VISION-LANGUAGE MODELS VIA MODULAR ATTRIBUTION AND INTERVENTION
 18.	Mitigating Object Hallucination in Large Vision-Language Models via Image-Grounded Guidance
@@ -404,7 +404,7 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 28.	Seek in the Dark: Reasoning via Test-Time Instance-Level Policy Gradient in Latent Space
 29.	DAPO: An Open-Source LLM Reinforcement Learning System at Scale
 30.	ReST-MCTS*: LLM Self-Training via Process Reward Guided Tree Search
-31.	LightRAG: Simple and Fast Retrieval-Augmented Generation
+31.	L
 32.	Efficient Part-level 3D Object Generation via Dual Volume Packing
 33.	UFM: A Simple Path towards Unified Dense Correspondence with Flow
 34.	BackdoorLLM: A Comprehensive Benchmark for Backdoor Attacks and Defenses on Large Language Models
@@ -419,7 +419,7 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 43.	AgentGym-RL: An Open-Source Framework to Train LLM Agents for Long-Horizon Decision Making via Multi-Turn RL
 44.	Process Reinforcement through Implicit Rewards
 45.	Semi-Supervised Preference Optimization with Limited Feedback
-46.	HiAgent: Hierarchical Working Memory Management for Solving Long-Horizon Agent Tasks with Large Language Model
+46.	Hi
 47.	Information Gain-based Policy Optimization: A Simple and Effective Approach for Multi-Turn Search Agents
 48.	AgentPO: Enhancing Multi-Agent Collaboration via Reinforcement Learning
 49.	"Group-in-Group Policy Optimization for LLM Agent Training, NeurIPS 2025
@@ -432,9 +432,9 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY5NTA0NzUyLC05NDk2NTQ2NDAsMTgwOT
-g5MTMwNSwtMTgxNjk1MTkzNCwxMTczMzc1OTI2LC0xNTgwODUw
-MTE3LDIwMjM4Njk5MjgsLTE0NzIzMDAwMjEsLTg1MjEyMjM4LC
-0xMjc2NDUwMjk2LC02MTMzNjc3MDksMTc3ODEyOTQ2LC04NDI3
-MDE2NTJdfQ==
+eyJoaXN0b3J5IjpbMTY2ODAzNDc1NywtOTQ5NjU0NjQwLDE4MD
+k4OTEzMDUsLTE4MTY5NTE5MzQsMTE3MzM3NTkyNiwtMTU4MDg1
+MDExNywyMDIzODY5OTI4LC0xNDcyMzAwMDIxLC04NTIxMjIzOC
+wtMTI3NjQ1MDI5NiwtNjEzMzY3NzA5LDE3NzgxMjk0NiwtODQy
+NzAxNjUyXX0=
 -->
