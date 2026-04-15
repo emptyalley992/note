@@ -364,77 +364,14 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 
 
 
-我需要你为我完成一项论文工作调研与复现难度评估的工作。
-具体来说，下面的论文列表里有51篇论文的标题，我需要你在谷歌学术、arxiv等平台检索论文阅读论文，并在开源平台（如github）搜索有无该论文的开源代码，然后评估复现难度，注意我的需求仅仅是复现
-
-# 要求
-1.复现难度的评估要从，论文所需的数据集是否是开源的，论文中对于方法的描述是否清晰，是否有开源的代码，有代码的将会大大降低复现难度，以及复现对及算力的要求等方面
-2.51篇论文都需要调研并评估，返回给我一个列表，说明每个论文的情况。如果无法检索到某论文，在返回的表格中备注好
-3.深度调研，深度思考后给出回答
-
-
-#  论文列表
-1.	LaSeR: Reinforcement Learning with Last-Token Self-Rewarding
-2.	Towards Thinking-Optimal Scaling of Test-Time Compute for LLM Reasoning
-3.	Absolute Zero: Reinforced Self-play Reasoning with Zero Data
-4.	RULEREASONER: REINFORCED RULE-BASED REASONING VIA DOMAIN-AWARE DYNAMIC SAMPLING
-5.	RL Tango: Reinforcing Generator and Verifier Together for Language Reasoning
-6.	T
-7.	R-Zero: Self-Evolving Reasoning LLM from Zero Data
-8.	Better LLM Reasoning via Dual-Play
-9.	T
-10.	Agent0: Unleashing Self-Evolving Agents from Zero Data via Tool-Integrated Reasoning
-11.	Dr. Zero: Self-Evolving Search Agents without Training Data
-12.	V-Zero: Self-Improving Multimodal Reasoning with Zero Annotation
-13.	DARC: Decoupled Asymmetric Reasoning Curriculum for LLM Evolution
-14.	A
-15.	FL
-16.	To
-17.	UNDERSTANDING AND MITIGATING HALLUCINATION IN LARGE VISION-LANGUAGE MODELS VIA MODULAR ATTRIBUTION AND INTERVENTION
-18.	Mitigating Object Hallucination in Large Vision-Language Models via Image-Grounded Guidance
-19.	MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild
-20.	OmniLottie: Generating Vector Animations via Parameterized Lottie Tokens
-21.	SkillNet: Create, Evaluate, and Connect AI Skills
-22.	MMR-Life: Piecing Together Real-life Scenes for Multimodal Multi-image Reasoning
-23.	Multi-agent Architecture Search via Agentic Supernet
-24.	Beyond Single Stationary Policies: Meta-Task Players as Naturally Superior Collaborators
-25.	MoME: Mixture of Multimodal Experts for Generalist Multimodal Large Language Models
-26.	TOPA: Extending Large Language Models for Video Understanding via Text-Only Pre-Alignment
-27.	FlowRL: Matching Reward Distributions for LLM Reasoning
-28.	Seek in the Dark: Reasoning via Test-Time Instance-Level Policy Gradient in Latent Space
-29.	DAPO: An Open-Source LLM Reinforcement Learning System at Scale
-30.	ReST-MCTS*: LLM Self-Training via Process Reward Guided Tree Search
-31.	L
-32.	Efficient Part-level 3D Object Generation via Dual Volume Packing
-33.	UFM: A Simple Path towards Unified Dense Correspondence with Flow
-34.	BackdoorLLM: A Comprehensive Benchmark for Backdoor Attacks and Defenses on Large Language Models
-35.	SWE-SQL: Illuminating LLM Pathways to Solve User SQL Issues in Real-World Applications
-36.	Defending Multimodal Backdoored Models by Repulsive Visual Prompt Tuning
-37.	DYNAACT: Large Language Model Reasoning with Dynamic Action Spaces
-38.	Lookahead Routing for Large Language Models
-39.	Distilling LLM Agent into Small Models with Retrieval and Code Tools
-40.	Retro-R1: LLM-based Agentic Retrosynthesis
-41.	Q-RAG: Long Context Multi‑Step Retrieval via Value‑Based Embedder Training
-42.	LoongRL: Reinforcement Learning for Advanced Reasoning over Long Contexts
-43.	AgentGym-RL: An Open-Source Framework to Train LLM Agents for Long-Horizon Decision Making via Multi-Turn RL
-44.	Process Reinforcement through Implicit Rewards
-45.	Semi-Supervised Preference Optimization with Limited Feedback
-46.	Hi
-47.	Information Gain-based Policy Optimization: A Simple and Effective Approach for Multi-Turn Search Agents
-48.	AgentPO: Enhancing Multi-Agent Collaboration via Reinforcement Learning
-49.	"Group-in-Group Policy Optimization for LLM Agent Training, NeurIPS 2025
-50.	Memagent: Reshaping long-context llm with multi-conv rl-based memory agent"
-51.	Agentic Entropy-Balanced Policy Optimization
-
-
 
 
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY2ODAzNDc1NywtOTQ5NjU0NjQwLDE4MD
-k4OTEzMDUsLTE4MTY5NTE5MzQsMTE3MzM3NTkyNiwtMTU4MDg1
-MDExNywyMDIzODY5OTI4LC0xNDcyMzAwMDIxLC04NTIxMjIzOC
-wtMTI3NjQ1MDI5NiwtNjEzMzY3NzA5LDE3NzgxMjk0NiwtODQy
-NzAxNjUyXX0=
+eyJoaXN0b3J5IjpbOTk4OTU5NzI4LC05NDk2NTQ2NDAsMTgwOT
+g5MTMwNSwtMTgxNjk1MTkzNCwxMTczMzc1OTI2LC0xNTgwODUw
+MTE3LDIwMjM4Njk5MjgsLTE0NzIzMDAwMjEsLTg1MjEyMjM4LC
+0xMjc2NDUwMjk2LC02MTMzNjc3MDksMTc3ODEyOTQ2LC04NDI3
+MDE2NTJdfQ==
 -->
