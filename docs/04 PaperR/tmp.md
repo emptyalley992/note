@@ -359,9 +359,48 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 
 
 
+# r
 
 
 
+1.	LaSeR: Reinforcement Learning with Last-Token Self-Rewarding
+2.	Towards Thinking-Optimal Scaling of Test-Time Compute for LLM Reasoning
+3.	Absolute Zero: Reinforced Self-play Reasoning with Zero Data
+4.	RULEREASONER: REINFORCED RULE-BASED REASONING VIA DOMAIN-AWARE DYNAMIC SAMPLING
+5.	RL Tango: Reinforcing Generator and Verifier Together for Language Reasoning
+6.	Better LLM Reasoning via Dual-Play
+7.	Agent0: Unleashing Self-Evolving Agents from Zero Data via Tool-Integrated Reasoning
+8.	Dr. Zero: Self-Evolving Search Agents without Training Data
+9.	V-Zero: Self-Improving Multimodal Reasoning with Zero Annotation
+10.	DARC: Decoupled Asymmetric Reasoning Curriculum for LLM Evolution
+11.	UNDERSTANDING AND MITIGATING HALLUCINATION IN LARGE VISION-LANGUAGE MODELS VIA MODULAR ATTRIBUTION AND INTERVENTION
+12.	MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild
+13.	OmniLottie: Generating Vector Animations via Parameterized Lottie Tokens
+14.	MMR-Life: Piecing Together Real-life Scenes for Multimodal Multi-image Reasoning
+15.	Multi-agent Architecture Search via Agentic Supernet
+16.	Beyond Single Stationary Policies: Meta-Task Players as Naturally Superior Collaborators
+17.	MoME: Mixture of Multimodal Experts for Generalist Multimodal Large Language Models
+18.	TOPA: Extending Large Language Models for Video Understanding via Text-Only Pre-Alignment
+19.	Seek in the Dark: Reasoning via Test-Time Instance-Level Policy Gradient in Latent Space
+20.	DAPO: An Open-Source LLM Reinforcement Learning System at Scale
+21.	ReST-MCTS*: LLM Self-Training via Process Reward Guided Tree Search
+22.	Efficient Part-level 3D Object Generation via Dual Volume Packing
+23.	UFM: A Simple Path towards Unified Dense Correspondence with Flow
+24.	BackdoorLLM: A Comprehensive Benchmark for Backdoor Attacks and Defenses on Large Language Models
+25.	SWE-SQL: Illuminating LLM Pathways to Solve User SQL Issues in Real-World Applications
+26.	Defending Multimodal Backdoored Models by Repulsive Visual Prompt Tuning
+27.	DYNAACT: Large Language Model Reasoning with Dynamic Action Spaces
+28.	Lookahead Routing for Large Language Models
+29.	Distilling LLM Agent into Small Models with Retrieval and Code Tools
+30.	Retro-R1: LLM-based Agentic Retrosynthesis
+31.	LoongRL: Reinforcement Learning for Advanced Reasoning over Long Contexts
+32.	AgentGym-RL: An Open-Source Framework to Train LLM Agents for Long-Horizon Decision Making via Multi-Turn RL
+33.	Process Reinforcement through Implicit Rewards
+34.	Information Gain-based Policy Optimization: A Simple and Effective Approach for Multi-Turn Search Agents
+35.	AgentPO: Enhancing Multi-Agent Collaboration via Reinforcement Learning
+36.	"Group-in-Group Policy Optimization for LLM Agent Training, NeurIPS 2025
+37.	Memagent: Reshaping long-context llm with multi-conv rl-based memory agent"
+38.	Agentic Entropy-Balanced Policy Optimization
 
 
 
@@ -369,9 +408,9 @@ OPHR 在所有关键指标上均显著超过上述基线。特别是在测试期
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTk4OTU5NzI4LC05NDk2NTQ2NDAsMTgwOT
-g5MTMwNSwtMTgxNjk1MTkzNCwxMTczMzc1OTI2LC0xNTgwODUw
-MTE3LDIwMjM4Njk5MjgsLTE0NzIzMDAwMjEsLTg1MjEyMjM4LC
-0xMjc2NDUwMjk2LC02MTMzNjc3MDksMTc3ODEyOTQ2LC04NDI3
-MDE2NTJdfQ==
+eyJoaXN0b3J5IjpbLTE2NjgzNTYzNTgsLTk0OTY1NDY0MCwxOD
+A5ODkxMzA1LC0xODE2OTUxOTM0LDExNzMzNzU5MjYsLTE1ODA4
+NTAxMTcsMjAyMzg2OTkyOCwtMTQ3MjMwMDAyMSwtODUyMTIyMz
+gsLTEyNzY0NTAyOTYsLTYxMzM2NzcwOSwxNzc4MTI5NDYsLTg0
+MjcwMTY1Ml19
 -->
