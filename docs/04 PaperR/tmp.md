@@ -5,10 +5,9 @@
 
 [TOC]
 
-## IV
-这份论文介绍了一个名为 **DeepVol** 的深度学习模型，旨在利用**高频（High-Frequency, HF）盘中数据**来预测**次日的波动率**。
+## 1
+	
 
-以下是对该论文任务要求的详细解读：
 
 
 
@@ -382,9 +381,9 @@
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzMwNzA2NTAzLC05NDk2NTQ2NDAsMTgwOT
-g5MTMwNSwtMTgxNjk1MTkzNCwxMTczMzc1OTI2LC0xNTgwODUw
-MTE3LDIwMjM4Njk5MjgsLTE0NzIzMDAwMjEsLTg1MjEyMjM4LC
-0xMjc2NDUwMjk2LC02MTMzNjc3MDksMTc3ODEyOTQ2LC04NDI3
-MDE2NTJdfQ==
+eyJoaXN0b3J5IjpbMTIxODk2MDQ5Miw3MzA3MDY1MDMsLTk0OT
+Y1NDY0MCwxODA5ODkxMzA1LC0xODE2OTUxOTM0LDExNzMzNzU5
+MjYsLTE1ODA4NTAxMTcsMjAyMzg2OTkyOCwtMTQ3MjMwMDAyMS
+wtODUyMTIyMzgsLTEyNzY0NTAyOTYsLTYxMzM2NzcwOSwxNzc4
+MTI5NDYsLTg0MjcwMTY1Ml19
 -->
