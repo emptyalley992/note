@@ -8,7 +8,7 @@
 ## 1
 	
 
-[1.  免密连接服务器](#1-Vscode)
+[1.  免密连接服务器](#1.-vscode)
 
 
 # tmp
@@ -384,7 +384,7 @@
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzUzNTU4MzAzLDEyMTg5NjA0OTIsNzMwNz
+eyJoaXN0b3J5IjpbNDU3NzcwMDE1LDEyMTg5NjA0OTIsNzMwNz
 A2NTAzLC05NDk2NTQ2NDAsMTgwOTg5MTMwNSwtMTgxNjk1MTkz
 NCwxMTczMzc1OTI2LC0xNTgwODUwMTE3LDIwMjM4Njk5MjgsLT
 E0NzIzMDAwMjEsLTg1MjEyMjM4LC0xMjc2NDUwMjk2LC02MTMz
