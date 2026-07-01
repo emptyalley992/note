@@ -855,6 +855,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="tmp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Vscode
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1028,6 +1045,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="tmp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Vscode
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1167,7 +1201,10 @@
 <div class="toc">
 <ul>
 <li><a href="#1">1</a></li>
-<li><a href="#tmp">tmp</a></li>
+<li><a href="#tmp">tmp</a><ul>
+<li><a href="#1-vscode">1. Vscode</a></li>
+</ul>
+</li>
 <li><a href="#code">code</a><ul>
 <li><a href="#_1">🌟 评估标准说明</a></li>
 <li><a href="#51">📊 51篇论文调研与复现难度评估表</a></li>
@@ -1184,7 +1221,7 @@
 </ul>
 </div>
 <h2 id="1">1<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p><a href="#2-Agentic-Workflow (智能体工作流)-的低门槛红利">new</a></p>
+<p><a href="#1-Vscode">1.  免密连接服务器</a></p>
 <h1 id="tmp">tmp<a class="headerlink" href="#tmp" title="Permanent link">&para;</a></h1>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>你是一个光电方向的专家，同时也是一个ai专家，研究方向为二者的交叉，你当前在进行一个实验，对番茄喷洒农药，然后对齐进行光谱分析，根据光谱结果来预测所喷洒的农药的浓度。从ai的角度理解，我现在有一堆样本数据，其存储在excel表格中，其中每行是一个样本（首行是列名），最后一列是预测的label值，例如，0表示未喷洒农药，0.5表示喷洒农药其浓度为0.5；1表示喷洒农药浓度为1。前面438列表示不同的频段。注意这是一个回归任务，在指标里需要你计算R2.
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>我已经实现了一个简易版本的代码，我需要你审计我的代码，思考改进的方案，改进的思路包括数据预处理（可能包括对光谱数据的特殊处理，如多元散射校正MSC等）、预测模型等。
@@ -1197,6 +1234,7 @@
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a># 已实现的版本
 </code></pre></div>
+<h3 id="1-vscode">1. Vscode<a class="headerlink" href="#1-vscode" title="Permanent link">&para;</a></h3>
 <h1 id="code">code<a class="headerlink" href="#code" title="Permanent link">&para;</a></h1>
 <p>这是一项工程量浩大且非常前沿的调研任务。你提供的这51篇论文绝大多数集中在<strong>2023年底至2025年初</strong>的最前沿领域，核心主线极为明显：<strong>大模型推理（Reasoning）、强化学习（RL/Self-play）、测试时计算（Test-Time Compute, 类o1/R1模型）、智能体工作流（Agentic Workflow）以及多模态（Multimodal）</strong>。</p>
 <p>为了给你提供“深度的调研与思考”，我不仅对这51篇论文进行了逐一的检索与评估，还将它们进行了分类，并从<strong>数据开源性、代码获取情况、算法工程复杂度、算力要求</strong>四个维度定义了<strong>复现难度（极低、低、中、高、极高）</strong>。</p>
@@ -1858,11 +1896,11 @@
 </ol>
 <p><strong>最后提醒</strong>：强化学习（RL）在 LLM 上的复现不仅是“代码能不能跑通”的问题，更是“能不能收敛”、“奖励曲线会不会崩溃”的玄学问题。对于涉及 <code>Policy Optimization</code> (如 #1, #34, #36, #38) 的论文，如果作者没有开源详细的超参数配置文件（learning rate, kl-penalty, batch size 等），复现难度应当直接被评估为“地狱级”。</p>
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzOTA3MzQyMjQsMTIxODk2MDQ5Miw3Mz
-A3MDY1MDMsLTk0OTY1NDY0MCwxODA5ODkxMzA1LC0xODE2OTUx
-OTM0LDExNzMzNzU5MjYsLTE1ODA4NTAxMTcsMjAyMzg2OTkyOC
-wtMTQ3MjMwMDAyMSwtODUyMTIyMzgsLTEyNzY0NTAyOTYsLTYx
-MzM2NzcwOSwxNzc4MTI5NDYsLTg0MjcwMTY1Ml19
+eyJoaXN0b3J5IjpbMzUzNTU4MzAzLDEyMTg5NjA0OTIsNzMwNz
+A2NTAzLC05NDk2NTQ2NDAsMTgwOTg5MTMwNSwtMTgxNjk1MTkz
+NCwxMTczMzc1OTI2LC0xNTgwODUwMTE3LDIwMjM4Njk5MjgsLT
+E0NzIzMDAwMjEsLTg1MjEyMjM4LC0xMjc2NDUwMjk2LC02MTMz
+Njc3MDksMTc3ODEyOTQ2LC04NDI3MDE2NTJdfQ==
 -->
 
 
